@@ -19,6 +19,8 @@ from pytorch_pretrained_bert import (
     TransfoXLModel,
     OpenAIGPTModel,
     OpenAIGPTTokenizer,
+    XLNetTokenizer,
+    XLNetModel,
 )
 
 from pytorch_pretrained_bert.modeling_openai import (
@@ -27,6 +29,10 @@ from pytorch_pretrained_bert.modeling_openai import (
 
 from pytorch_pretrained_bert.modeling_transfo_xl import (
     PRETRAINED_MODEL_ARCHIVE_MAP as TRANSFORMER_XL_PRETRAINED_MODEL_ARCHIVE_MAP,
+)
+
+from pytorch_pretrained_bert.modeling_xlnet import (
+    PRETRAINED_MODEL_ARCHIVE_MAP as XLNET_PRETRAINED_MODEL_ARCHIVE_MAP,
 )
 
 import flair
@@ -738,6 +744,59 @@ class TransformerXLEmbeddings(TokenEmbeddings):
                     sentence.tokens, range(len(sentence.tokens))
                 ):
                     token.set_embedding(self.name, hidden_states[0][token_idx])
+
+        return sentences
+
+    def extra_repr(self):
+        return "model={}".format(self.name)
+
+    def __str__(self):
+        return self.name
+
+
+class XLNetEmbeddings(TokenEmbeddings):
+    def __init__(self, model: str = "xlnet-large-cased"):
+        """XLNet embeddings, as proposed in Yang et al., 2019.
+        :param model: name of XLNet model
+        """
+        super().__init__()
+
+        if model not in XLNET_PRETRAINED_MODEL_ARCHIVE_MAP.keys():
+            raise ValueError("Provided XLNet model is not available.")
+
+        self.tokenizer = XLNetTokenizer.from_pretrained(model)
+        self.model = XLNetModel.from_pretrained(model)
+        self.name = model
+        self.static_embeddings = True
+
+        dummy_sentence: Sentence = Sentence()
+        dummy_sentence.add_token(Token("hello"))
+        embedded_dummy = self.embed(dummy_sentence)
+        self.__embedding_length: int = len(
+            embedded_dummy[0].get_token(1).get_embedding()
+        )
+
+    @property
+    def embedding_length(self) -> int:
+        return self.__embedding_length
+
+    def _add_embeddings_internal(self, sentences: List[Sentence]) -> List[Sentence]:
+        self.model.to(flair.device)
+        self.model.eval()
+
+        with torch.no_grad():
+            for sentence in sentences:
+                for token in sentence.tokens:
+                    token_text = token.text
+                    subwords = self.tokenizer.tokenize(token_text)
+                    indexed_tokens = self.tokenizer.convert_tokens_to_ids(subwords)
+                    tokens_tensor = torch.tensor([indexed_tokens])
+                    tokens_tensor = tokens_tensor.to(flair.device)
+
+                    output, hidden_states, new_mems = self.model(tokens_tensor)
+
+                    # Use embedding of first subword
+                    token.set_embedding(self.name, output[0][0])
 
         return sentences
 
