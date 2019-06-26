@@ -776,6 +776,20 @@ class XLNetEmbeddings(TokenEmbeddings):
             embedded_dummy[0].get_token(1).get_embedding()
         )
 
+    def __getstate__(self):
+        # Copy the object's state from self.__dict__ which contains
+        # all our instance attributes. Always use the dict.copy()
+        # method to avoid modifying the original state.
+        state = self.__dict__.copy()
+        # Remove the unpicklable entries.
+        state["tokenizer"] = None
+        return state
+
+    def __setstate__(self, d):
+        self.__dict__ = d
+        # Restore unpickable entries
+        self.tokenizer = XLNetTokenizer.from_pretrained(self.name)
+
     @property
     def embedding_length(self) -> int:
         return self.__embedding_length
