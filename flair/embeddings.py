@@ -11,6 +11,7 @@ import numpy as np
 import torch
 from bpemb import BPEmb
 from deprecated import deprecated
+import tempfile
 
 from pytorch_pretrained_bert import (
     BertTokenizer,
@@ -288,6 +289,19 @@ class WordEmbeddings(TokenEmbeddings):
             self.precomputed_word_embeddings = gensim.models.KeyedVectors.load_word2vec_format(
                 str(embeddings), binary=True
             )
+        elif str(embeddings).endswith(".txt"):
+            try:
+                # try to load embeddings with header
+                self.precomputed_word_embeddings = gensim.models.KeyedVectors.load_word2vec_format(
+                    str(embeddings), binary=False
+                )
+            except:
+                # load embeddings without header
+                tmp_file = tempfile.NamedTemporaryFile().name
+                _ = gensim.scripts.glove2word2vec.glove2word2vec(str(embeddings), tmp_file)
+                self.precomputed_word_embeddings = gensim.models.KeyedVectors.load_word2vec_format(
+                    tmp_file, binary=False
+                )
         else:
             self.precomputed_word_embeddings = gensim.models.KeyedVectors.load(
                 str(embeddings)
