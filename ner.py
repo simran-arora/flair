@@ -2,6 +2,9 @@ from flair.data import Corpus
 from flair.datasets import WIKINER_ENGLISH
 from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings
 from typing import List
+import numpy as np
+import random
+import torch
 
 def train_ner(embedding, resultdir):
     # 1. get the corpus
@@ -51,6 +54,16 @@ def train_ner(embedding, resultdir):
                 monitor_test=True)
 
 if __name__ == "__main__":
-    embedding = '/mnt/mleszczy/results/embs/wiki/w2v_cbow_wiki.en.txt_2018_seed_1234_dim_400_lr_0.05.50.w.txt'
-    resultdir = 'resources/taggers/example-ner-wiki'
+    # embedding = '/mnt/mleszczy/results/embs/wiki/w2v_cbow_wiki.en.txt_2018_seed_1234_dim_400_lr_0.05.50.w.txt'
+    resultdir = 'resources/taggers/example-ner-text8-4'
+    embedding = '/mnt/mleszczy/results/embs/dim_sweep_seed/mc_text8_96M_seed_1234_dim_50_lr_2.100.txt'
+    # set seeds
+    seed = 1234
+    print('Setting seeds')
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.backends.cudnn.deterministic=True
+    np.random.seed(seed)
+    random.seed(seed)
     train_ner(embedding, resultdir)
