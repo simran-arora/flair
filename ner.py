@@ -1,11 +1,11 @@
 from flair.data import Corpus
-from flair.datasets import WIKINER_ENGLISH
+from flair.data_fetcher import  NLPTaskDataFetcher, NLPTask
 from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings
 from typing import List
 
 def train_ner(embedding, resultdir):
     # 1. get the corpus
-    corpus: Corpus = WIKINER_ENGLISH().downsample(0.1)
+    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path='resources/tasks')
     print(corpus)
 
     # 2. what tag do we want to predict?
@@ -51,6 +51,6 @@ def train_ner(embedding, resultdir):
                 monitor_test=True)
 
 if __name__ == "__main__":
-    embedding = '/mnt/mleszczy/results/embs/wiki/w2v_cbow_wiki.en.txt_2018_seed_1234_dim_400_lr_0.05.50.w.txt'
+    embedding = '/dfs/scratch1/mleszczy/sigmod/embs/wiki/wiki/w2v_cbow_wiki.en.txt_2018_seed_1234_dim_400_lr_0.05.50.w.txt'
     resultdir = 'resources/taggers/example-ner-wiki'
     train_ner(embedding, resultdir)
