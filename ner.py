@@ -5,10 +5,11 @@ from typing import List
 import numpy as np
 import random
 import torch
+import argparse
 
-def train_ner(embedding, resultdir):
+def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False):
     # 1. get the corpus
-    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path='resources/tasks')
+    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
 
     # 2. what tag do we want to predict?
@@ -39,7 +40,7 @@ def train_ner(embedding, resultdir):
                                             embeddings=embeddings,
                                             tag_dictionary=tag_dictionary,
                                             tag_type=tag_type,
-                                            use_crf=True)
+                                            use_crf=use_crf)
 
     # 6. initialize trainer
     from flair.trainers import ModelTrainer
@@ -54,10 +55,14 @@ def train_ner(embedding, resultdir):
                 monitor_test=True)
 
 if __name__ == "__main__":
-    embedding = '/dfs/scratch1/mleszczy/sigmod/embs/wiki/wiki/w2v_cbow_wiki.en.txt_2018_seed_1234_dim_400_lr_0.05.50.w.txt'
-    resultdir = 'resources/taggers/example-ner-wiki'
-    # set seeds
-    seed = 1234
+    parser = argparse.ArgumentParser(description="")
+    parser.add_argument("--embedding", type=str, required=True)
+    parser.add_argument("--resultdir", type=str, required=True)
+    parser.add_argument("--seed", type=int, required=True)
+    args = parser.parse_args()
+    seed = args.seed
+    embedding = args.embedding
+    resultdir = args.resultdir
     print('Setting seeds')
     torch.manual_seed(seed)
     if torch.cuda.is_available():
