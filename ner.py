@@ -7,7 +7,7 @@ import random
 import torch
 import argparse
 
-def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False):
+def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False, lr=0.1):
     # 1. get the corpus
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
@@ -49,7 +49,7 @@ def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False):
 
     # 7. start training
     trainer.train(resultdir,
-                learning_rate=0.1,
+                learning_rate=lr,
                 mini_batch_size=32,
                 max_epochs=150,
                 monitor_test=True)
@@ -59,6 +59,8 @@ if __name__ == "__main__":
     parser.add_argument("--embedding", type=str, required=True)
     parser.add_argument("--resultdir", type=str, required=True)
     parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--lr", type=float, required=True)
+    parser.add_argument("--use_crf", action='store_true', required=True)
     args = parser.parse_args()
     seed = args.seed
     embedding = args.embedding
@@ -70,4 +72,4 @@ if __name__ == "__main__":
         torch.backends.cudnn.deterministic=True
     np.random.seed(seed)
     random.seed(seed)
-    train_ner(embedding, resultdir)
+    train_ner(embedding, resultdir, use_crf=args.crf, lr=args.lr)

@@ -78,6 +78,8 @@ class ModelTrainer:
 
         log_line(log)
         log.info(f'Model: "{self.model}"')
+        log.info(f' - use_crf: "{self.model.use_crf}"')
+        log.info(f' - use_rnn: "{self.model.use_rnn}"')
         log_line(log)
         log.info(f'Corpus: "{self.corpus}"')
         log_line(log)
