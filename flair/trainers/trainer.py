@@ -391,6 +391,7 @@ class ModelTrainer:
         num_workers: int = 8,
     ):
 
+        log_handler = add_file_handler(log, base_path / "eval.log")
         log_line(log)
         log.info("Testing using best model ...")
 
@@ -399,6 +400,21 @@ class ModelTrainer:
         if (base_path / "best-model.pt").exists():
             self.model = self.model.load(base_path / "best-model.pt")
 
+        log.info("Dev results ...")
+        dev_results, dev_loss = self.model.evaluate(
+            self.corpus.dev,
+            eval_mini_batch_size=eval_mini_batch_size,
+            embeddings_in_memory=embeddings_in_memory,
+            out_path=base_path / "dev.tsv",
+            num_workers=num_workers,
+        )
+
+        dev_results: Result = dev_results
+        log.info(dev_results.log_line)
+        log.info(dev_results.detailed_results)
+        log_line(log)
+
+        log.info("Test results ...")
         test_results, test_loss = self.model.evaluate(
             self.corpus.test,
             eval_mini_batch_size=eval_mini_batch_size,

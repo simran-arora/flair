@@ -24,13 +24,7 @@ def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False, lr
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
 
-        WordEmbeddings(embedding),
-        # comment in this line to use character embeddings
-        # CharacterEmbeddings(),
-
-        # comment in these lines to use flair embeddings
-        # FlairEmbeddings('news-forward'),
-        # FlairEmbeddings('news-backward'),
+        WordEmbeddings(embedding)
     ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)

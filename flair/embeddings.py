@@ -289,7 +289,7 @@ class WordEmbeddings(TokenEmbeddings):
             self.precomputed_word_embeddings = gensim.models.KeyedVectors.load_word2vec_format(
                 str(embeddings), binary=True
             )
-        elif str(embeddings).endswith(".txt"):
+        elif str(embeddings).endswith(".txt") or str(embeddings).endswith(".c") or str(embeddings).endswith(".c_same_range"):
             try:
                 # try to load embeddings with header
                 self.precomputed_word_embeddings = gensim.models.KeyedVectors.load_word2vec_format(

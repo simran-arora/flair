@@ -80,6 +80,7 @@ class SequenceTagger(flair.nn.Model):
         word_dropout: float = 0.05,
         locked_dropout: float = 0.5,
         pickle_module: str = "pickle",
+        relearn_embeddings: bool = True
     ):
 
         super(SequenceTagger, self).__init__()
@@ -88,6 +89,7 @@ class SequenceTagger(flair.nn.Model):
         self.hidden_size = hidden_size
         self.use_crf: bool = use_crf
         self.rnn_layers: int = rnn_layers
+        self.relearn_embeddings: bool = relearn_embeddings
 
         self.trained_epochs: int = 0
 
@@ -119,8 +121,6 @@ class SequenceTagger(flair.nn.Model):
             self.locked_dropout = flair.nn.LockedDropout(locked_dropout)
 
         rnn_input_dim: int = self.embeddings.embedding_length
-
-        self.relearn_embeddings: bool = True
 
         if self.relearn_embeddings:
             self.embedding2nn = torch.nn.Linear(rnn_input_dim, rnn_input_dim)
@@ -525,9 +525,9 @@ class SequenceTagger(flair.nn.Model):
         self, feature, sentences
     ) -> (List[List[Label]], List[List[List[Label]]]):
         """
-        Returns a tuple of two lists: 
+        Returns a tuple of two lists:
          - The first list corresponds to the most likely `Label` per token in each sentence.
-         - The second list contains a probability distribution over all `Labels` for each token 
+         - The second list contains a probability distribution over all `Labels` for each token
            in a sentence for all sentences.
         """
 
