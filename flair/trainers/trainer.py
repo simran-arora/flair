@@ -393,6 +393,7 @@ class ModelTrainer:
 
         log_handler = add_file_handler(log, base_path / "eval.log")
         log_line(log)
+        log.info(f'Model: "{self.model}"')
         log.info("Testing using best model ...")
 
         self.model.eval()

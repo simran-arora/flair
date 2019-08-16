@@ -178,6 +178,7 @@ class SequenceTagger(flair.nn.Model):
             "rnn_layers": self.rnn_layers,
             "use_word_dropout": self.use_word_dropout,
             "use_locked_dropout": self.use_locked_dropout,
+            "relearn_embeddings": self.relearn_embeddings
         }
         return model_state
 
@@ -192,7 +193,9 @@ class SequenceTagger(flair.nn.Model):
             if not "use_locked_dropout" in state.keys()
             else state["use_locked_dropout"]
         )
-
+        print(state["state_dict"].keys())
+        relearn_embeddings = (False if not ("embedding2nn.weight" in state["state_dict"].keys())
+            else True)
         model = SequenceTagger(
             hidden_size=state["hidden_size"],
             embeddings=state["embeddings"],
@@ -204,6 +207,7 @@ class SequenceTagger(flair.nn.Model):
             dropout=use_dropout,
             word_dropout=use_word_dropout,
             locked_dropout=use_locked_dropout,
+            relearn_embeddings=relearn_embeddings
         )
         model.load_state_dict(state["state_dict"])
         return model
