@@ -9,7 +9,7 @@ import argparse
 from pathlib import Path
 from flair.training_utils import EvaluationMetric
 
-def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False, lr=0.1, finetune=False):
+def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False, lr=0.1, finetune=True):
     # 1. get the corpus
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
