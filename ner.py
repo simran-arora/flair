@@ -14,6 +14,18 @@ def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False, lr
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
 
+    with open('tmp/eng.testb.bioes', 'w') as f: 
+        # got through each sentence
+        for sentence in corpus.test:
+
+            # go through each token of sentence
+            for token in sentence:
+                # print what you need (text and NER value)
+                f.write(f"{token.text}\t{token.get_tag('ner').value}\n")
+
+            # print newline at end of each sentence
+            f.write('\n') 
+
     # 2. what tag do we want to predict?
     tag_type = 'ner'
 
