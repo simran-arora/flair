@@ -9,13 +9,40 @@ import argparse
 from pathlib import Path
 from flair.training_utils import EvaluationMetric
 
-def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False, lr=0.1, finetune=True):
+def train_ner(cmdline_args, use_cuda = True):
+    #def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False, lr=0.1, finetune=True):
+
+    #0. setup
+
+    # Parse cmdline args and setup environment
+    parser = argparse.ArgumentParser(
+        'NER Document Reader',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+
+    args = parser.parse_args(cmdline_args)
+    embedding = args.embeddings
+    resultdir = args.resultdir
+    datadir = args.datadir
+    use_crf = args.use_crf
+    lr = args.lr
+    finetune = args.finetune
+    seed = args.seed 
+
+    print('Setting seeds')
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.backends.cudnn.deterministic=True
+    np.random.seed(seed)
+    random.seed(seed)
+
     # 1. get the corpus
-    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
+    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=args.datadir)
     print(corpus)
 
     with open('tmp/eng.testb.bioes', 'w') as f: 
-        # got through each sentence
+        # go through each sentence
         for sentence in corpus.test:
 
             # go through each token of sentence
@@ -63,7 +90,32 @@ def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False, lr
                 max_epochs=150,
                 monitor_test=True)
 
-def eval_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False):
+    f1_scores, exact_match_scores = main(args)
+    return f1_scores, exact_match_scores
+
+def eval_ner(args):
+    #def eval_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False):
+
+    # Parse cmdline args and setup environment
+    parser = argparse.ArgumentParser(
+        'NER Document Reader',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+
+    embedding = args.embeddings
+    resultdir = args.resultdir
+    datadir = args.datadir
+    use_crf = args.use_crf
+    seed = args.seed 
+
+    print('Setting seeds')
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.backends.cudnn.deterministic=True
+    np.random.seed(seed)
+    random.seed(seed)
+
     # 1. get the corpus
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
@@ -77,7 +129,6 @@ def eval_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False):
 
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
-
         WordEmbeddings(embedding),
     ]
 
@@ -104,28 +155,30 @@ def eval_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False):
         embeddings_in_memory=True,
         evaluation_metric=EvaluationMetric.MICRO_F1_SCORE,
         eval_mini_batch_size=32)
+    
+    f1_scores = []
+    exact_match_scores = []
+    f1_scores.append(EvaluationMetric.MACRO_F1_SCORE)
+    return f1_scores, exact_match_scores
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="")
-    parser.add_argument("--embedding", type=str, required=True)
-    parser.add_argument("--resultdir", type=str, required=True)
-    parser.add_argument("--seed", type=int, required=True)
-    parser.add_argument("--lr", type=float, required=True)
-    parser.add_argument("--use_crf", type=bool, default=False)
-    parser.add_argument("--finetune", type=bool, default=False)
-    parser.add_argument("--eval", action='store_true')
-    args = parser.parse_args()
-    seed = args.seed
-    embedding = args.embedding
-    resultdir = args.resultdir
-    print('Setting seeds')
-    torch.manual_seed(seed)
-    if torch.cuda.is_available():
-        torch.cuda.manual_seed(seed)
-        torch.backends.cudnn.deterministic=True
-    np.random.seed(seed)
-    random.seed(seed)
-    if not args.eval:
-        train_ner(embedding, resultdir, use_crf=args.use_crf, lr=args.lr, finetune=finetune)
-    else:
-        eval_ner(embedding, resultdir, use_crf=args.use_crf)
+#if __name__ == "__main__":
+#    parser = argparse.ArgumentParser(description="")
+#    parser.add_argument("--embedding", type=str, required=True)
+#    parser.add_argument("--resultdir", type=str, required=True)
+#    parser.add_argument("--seed", type=int, required=True)
+#    parser.add_argument("--lr", type=float, required=True)
+#    parser.add_argument("--use_crf", type=bool, default=False)
+#    parser.add_argument("--finetune", type=bool, default=False)
+#    parser.add_argument("--eval", action='store_true')
+#    args = parser.parse_args()
+#    seed = args.seed
+#    embedding = args.embedding
+#    resultdir = args.resultdir
+# if not args.eval:
+#       train_ner(embedding, resultdir, use_crf=args.use_crf, lr=args.lr, finetune=finetune)
+#   else:
+#       eval_ner(embedding, resultdir, use_crf=args.use_crf)
+    
+def main(args):
+    f1_scores, exact_match_scores = eval_ner(args)
+    return f1_scores, exact_match_scores
