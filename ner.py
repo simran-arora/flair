@@ -12,20 +12,23 @@ from pathlib import Path
 from flair.training_utils import EvaluationMetric
 
 def train_ner(cmdline_args, use_cuda = True):
-    #def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False, lr=0.1, finetune=True):
-
     #0. setup
 
     # Parse cmdline args and setup environment
-    parser = argparse.ArgumentParser(
-        'NER Document Reader',
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
-    )
+
+    parser = argparse.ArgumentParser(description="")
+    parser.add_argument("--embedding", type=str, required=True)
+    parser.add_argument("--resultdir", type=str, required=True)
+    parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--lr", type=float, required=True)
+    parser.add_argument("--use_crf", type=bool, default=False)
+    parser.add_argument("--finetune", type=bool, default=True)
+    parser.add_argument("--datadir", type=str, required=True)
 
     args = parser.parse_args(cmdline_args)
-    embedding = args.embeddings
+    embedding = args.embedding
     resultdir = args.resultdir
-    datadir = datadir='resources/tasks'
+    datadir = args.datadir
     use_crf = args.use_crf
     lr = args.lr
     finetune = args.finetune
