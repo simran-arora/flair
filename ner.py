@@ -1,3 +1,5 @@
+#import sys
+#sys.path.insert(0, '/flair/')
 from flair.data import Corpus
 from flair.data_fetcher import  NLPTaskDataFetcher, NLPTask
 from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings
@@ -23,7 +25,7 @@ def train_ner(cmdline_args, use_cuda = True):
     args = parser.parse_args(cmdline_args)
     embedding = args.embeddings
     resultdir = args.resultdir
-    datadir = args.datadir
+    datadir = datadir='resources/tasks'
     use_crf = args.use_crf
     lr = args.lr
     finetune = args.finetune
