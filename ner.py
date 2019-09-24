@@ -36,36 +36,6 @@ def train_ner(cmdline_args, use_cuda = True):
     finetune = args.finetune
     seed = args.seed 
 
-    # convert our custom embeddings to gensim format
-    #embedding = gensim.models.KeyedVectors.load_word2vec_format(embed_path, binary=False)
-    #embedding.save(embed_path)
-
-
-    print('Setting seeds')
-    torch.manual_seed(seed)
-    if torch.cuda.is_available():
-        torch.cuda.manual_seed(seed)
-        torch.backends.cudnn.deterministic=True
-    np.random.seed(seed)
-    random.seed(seed)
-
-    # 1. get the corpus
-    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=args.datadir)
-    # corpus = flair.datasets.UD_ENGLISH()
-    #print(len(corpus))
-
-    #with open('tmp/eng.testb.bioes', 'w') as f: 
-    #    # go through each sentence
-    #    for sentence in corpus.test:
-    #
-    #        # go through each token of sentence
-    #        for token in sentence:
-    #            # print what you need (text and NER value)
-    #            f.write(f"{token.text}\t{token.get_tag('ner').value}\n")
-    #
-    #        # print newline at end of each sentence
-    #        f.write('\n') 
-
     # 2. what tag do we want to predict?
     tag_type = 'ner'
 
