@@ -1,9 +1,11 @@
 #import sys
 #sys.path.insert(0, '/flair/')
 from flair.data import Corpus
+import flair.datasets
 from flair.data_fetcher import  NLPTaskDataFetcher, NLPTask
 from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings
 from typing import List
+import os
 import numpy as np
 import random
 import torch
@@ -27,7 +29,7 @@ def train_ner(cmdline_args, use_cuda = True):
 
     args = parser.parse_args(cmdline_args)
     embedding = args.embedding
-    resultdir = args.resultdir
+    resultdir = os.path.dirname(embedding)
     datadir = args.datadir
     use_crf = args.use_crf
     lr = args.lr
@@ -43,20 +45,21 @@ def train_ner(cmdline_args, use_cuda = True):
     random.seed(seed)
 
     # 1. get the corpus
-    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=args.datadir)
-    print(corpus)
+    #    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.UD_ENGLISH, base_path=args.datadir)
+    corpus = flair.datasets.UD_ENGLISH()
+    #print(len(corpus))
 
-    with open('tmp/eng.testb.bioes', 'w') as f: 
-        # go through each sentence
-        for sentence in corpus.test:
-
-            # go through each token of sentence
-            for token in sentence:
-                # print what you need (text and NER value)
-                f.write(f"{token.text}\t{token.get_tag('ner').value}\n")
-
-            # print newline at end of each sentence
-            f.write('\n') 
+#    with open('tmp/eng.testb.bioes', 'w') as f: 
+#        # go through each sentence
+#        for sentence in corpus.test:
+#
+#            # go through each token of sentence
+#            for token in sentence:
+#                # print what you need (text and NER value)
+#                f.write(f"{token.text}\t{token.get_tag('ner').value}\n")
+#
+#            # print newline at end of each sentence
+#            f.write('\n') 
 
     # 2. what tag do we want to predict?
     tag_type = 'ner'
@@ -67,7 +70,6 @@ def train_ner(cmdline_args, use_cuda = True):
 
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
-
         WordEmbeddings(embedding)
     ]
 
@@ -92,25 +94,33 @@ def train_ner(cmdline_args, use_cuda = True):
     trainer.train(resultdir,
                 learning_rate=lr,
                 mini_batch_size=32,
-                max_epochs=150,
+                max_epochs=1,
                 monitor_test=True)
 
-    f1_scores, exact_match_scores = main(args)
+    f1_scores, exact_match_scores = eval(cmdline_args)
     return f1_scores, exact_match_scores
 
-def eval_ner(args):
+def eval_ner(cmdline_args):
     #def eval_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False):
 
     # Parse cmdline args and setup environment
-    parser = argparse.ArgumentParser(
-        'NER Document Reader',
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
-    )
 
-    embedding = args.embeddings
-    resultdir = args.resultdir
+    parser = argparse.ArgumentParser(description="")
+    parser.add_argument("--embedding", type=str, required=True)
+    parser.add_argument("--resultdir", type=str, required=True)
+    parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--lr", type=float, required=True)
+    parser.add_argument("--use_crf", type=bool, default=False)
+    parser.add_argument("--finetune", type=bool, default=True)
+    parser.add_argument("--datadir", type=str, required=True)
+
+    args = parser.parse_args(cmdline_args)
+    embedding = args.embedding
+    resultdir = os.path.dirname(embedding)
     datadir = args.datadir
     use_crf = args.use_crf
+    lr = args.lr
+    finetune = args.finetune
     seed = args.seed 
 
     print('Setting seeds')
@@ -122,9 +132,8 @@ def eval_ner(args):
     random.seed(seed)
 
     # 1. get the corpus
-    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
-    print(corpus)
-
+    corpus = flair.datasets.UD_ENGLISH()
+ 
     # 2. what tag do we want to predict?
     tag_type = 'ner'
 
@@ -164,6 +173,10 @@ def eval_ner(args):
     f1_scores = []
     exact_match_scores = []
     f1_scores.append(EvaluationMetric.MACRO_F1_SCORE)
+    print("MACRO_F1_SCORE")
+    print(EvaluationMetric.MACRO_F1_SCORE)
+    print("MICRO_F1_SCORE")
+    print(EvaluationMetric.MICRO_F1_SCORE)
     return f1_scores, exact_match_scores
 
 #if __name__ == "__main__":
@@ -184,6 +197,6 @@ def eval_ner(args):
 #   else:
 #       eval_ner(embedding, resultdir, use_crf=args.use_crf)
     
-def main(args):
-    f1_scores, exact_match_scores = eval_ner(args)
-    return f1_scores, exact_match_scores
+#def main(args):
+#    f1_scores, exact_match_scores = eval_ner(args)
+#    return f1_scores, exact_match_scores
