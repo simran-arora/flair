@@ -3,7 +3,7 @@
 from flair.data import Corpus
 import flair.datasets
 from flair.data_fetcher import  NLPTaskDataFetcher, NLPTask
-from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings
+from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings, PooledFlairEmbeddings
 from typing import List
 import os
 import numpy as np
@@ -50,21 +50,21 @@ def train_ner(cmdline_args, use_cuda = True):
     random.seed(seed)
 
     # 1. get the corpus
-    #    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.UD_ENGLISH, base_path=args.datadir)
-    corpus = flair.datasets.UD_ENGLISH()
+    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=args.datadir)
+    # corpus = flair.datasets.UD_ENGLISH()
     #print(len(corpus))
 
-#    with open('tmp/eng.testb.bioes', 'w') as f: 
-#        # go through each sentence
-#        for sentence in corpus.test:
-#
-#            # go through each token of sentence
-#            for token in sentence:
-#                # print what you need (text and NER value)
-#                f.write(f"{token.text}\t{token.get_tag('ner').value}\n")
-#
-#            # print newline at end of each sentence
-#            f.write('\n') 
+    #with open('tmp/eng.testb.bioes', 'w') as f: 
+    #    # go through each sentence
+    #    for sentence in corpus.test:
+    #
+    #        # go through each token of sentence
+    #        for token in sentence:
+    #            # print what you need (text and NER value)
+    #            f.write(f"{token.text}\t{token.get_tag('ner').value}\n")
+    #
+    #        # print newline at end of each sentence
+    #        f.write('\n') 
 
     # 2. what tag do we want to predict?
     tag_type = 'ner'
@@ -76,7 +76,11 @@ def train_ner(cmdline_args, use_cuda = True):
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
         #WordEmbeddings(embedding)
-	WordEmbeddings('glove')
+	WordEmbeddings('glove')#,
+	
+	#PooledFlairEmbeddings('news_forward', pooling='min'),
+	
+	#PooledFlairEmbeddings('news_backward',pooling='min')
     ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
@@ -87,8 +91,8 @@ def train_ner(cmdline_args, use_cuda = True):
     tagger: SequenceTagger = SequenceTagger(hidden_size=256,
                                             embeddings=embeddings,
                                             tag_dictionary=tag_dictionary,
-                                            tag_type=tag_type,
-                                            use_crf=use_crf)
+                                            tag_type=tag_type)
+                                            #use_crf=use_crf)
                                             #relearn_embeddings=finetune)
 
     # 6. initialize trainer
@@ -98,10 +102,10 @@ def train_ner(cmdline_args, use_cuda = True):
 
     # 7. start training
     trainer.train(resultdir,
-                learning_rate=lr,
-                mini_batch_size=32,
-                max_epochs=1,
-                monitor_test=True)
+                #learning_rate=lr,
+                #mini_batch_size=32,
+                max_epochs=150) 
+                #monitor_test=True)
 
     f1_scores, exact_match_scores = eval_ner(cmdline_args)
     print(f1_scores)
@@ -143,7 +147,8 @@ def eval_ner(cmdline_args):
     random.seed(seed)
 
     # 1. get the corpus
-    corpus = flair.datasets.UD_ENGLISH()
+    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=args.datadir)
+    #corpus = flair.datasets.UD_ENGLISH()
  
     # 2. what tag do we want to predict?
     tag_type = 'ner'
@@ -155,7 +160,9 @@ def eval_ner(cmdline_args):
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
         #WordEmbeddings(embedding),
-        WordEmbeddings('glove')
+        WordEmbeddings('glove')#,
+    	#PooledFlairEmbeddings('news_forward', pooling='min'),
+	#PooledFlairEmbeddings('news_backward',pooling='min')
     ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
