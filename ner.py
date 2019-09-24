@@ -12,12 +12,12 @@ import torch
 import argparse
 from pathlib import Path
 from flair.training_utils import EvaluationMetric
+import gensim
 
 def train_ner(cmdline_args, use_cuda = True):
     #0. setup
 
     # Parse cmdline args and setup environment
-
     parser = argparse.ArgumentParser(description="")
     parser.add_argument("--embedding", type=str, required=True)
     parser.add_argument("--resultdir", type=str, required=True)
@@ -28,13 +28,18 @@ def train_ner(cmdline_args, use_cuda = True):
     parser.add_argument("--datadir", type=str, required=True)
 
     args = parser.parse_args(cmdline_args)
-    embedding = args.embedding
-    resultdir = os.path.dirname(embedding)
+    embed_path = args.embedding
+    resultdir = os.path.dirname(embed_path)
     datadir = args.datadir
     use_crf = args.use_crf
     lr = args.lr
     finetune = args.finetune
     seed = args.seed 
+
+    # convert our custom embeddings to gensim format
+    #embedding = gensim.models.KeyedVectors.load_word2vec_format(embed_path, binary=False)
+    #embedding.save(embed_path)
+
 
     print('Setting seeds')
     torch.manual_seed(seed)
@@ -70,7 +75,8 @@ def train_ner(cmdline_args, use_cuda = True):
 
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
-        WordEmbeddings(embedding)
+        #WordEmbeddings(embedding)
+	WordEmbeddings('glove')
     ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
@@ -82,8 +88,8 @@ def train_ner(cmdline_args, use_cuda = True):
                                             embeddings=embeddings,
                                             tag_dictionary=tag_dictionary,
                                             tag_type=tag_type,
-                                            use_crf=use_crf,
-                                            relearn_embeddings=finetune)
+                                            use_crf=use_crf)
+                                            #relearn_embeddings=finetune)
 
     # 6. initialize trainer
     from flair.trainers import ModelTrainer
@@ -97,7 +103,8 @@ def train_ner(cmdline_args, use_cuda = True):
                 max_epochs=1,
                 monitor_test=True)
 
-    f1_scores, exact_match_scores = eval(cmdline_args)
+    f1_scores, exact_match_scores = eval_ner(cmdline_args)
+    print(f1_scores)
     return f1_scores, exact_match_scores
 
 def eval_ner(cmdline_args):
@@ -115,13 +122,17 @@ def eval_ner(cmdline_args):
     parser.add_argument("--datadir", type=str, required=True)
 
     args = parser.parse_args(cmdline_args)
-    embedding = args.embedding
-    resultdir = os.path.dirname(embedding)
+    embed_path = args.embedding
+    resultdir = os.path.dirname(embed_path)
     datadir = args.datadir
     use_crf = args.use_crf
     lr = args.lr
     finetune = args.finetune
     seed = args.seed 
+
+    # convert our custom embeddings to gensim format
+    #embedding = gensim.models.KeyedVectors.load_word2vec_format(embed_path, binary=False)
+    #embedding.save(embed_path)
 
     print('Setting seeds')
     torch.manual_seed(seed)
@@ -143,7 +154,8 @@ def eval_ner(cmdline_args):
 
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
-        WordEmbeddings(embedding),
+        #WordEmbeddings(embedding),
+        WordEmbeddings('glove')
     ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
@@ -155,28 +167,24 @@ def eval_ner(cmdline_args):
                                             embeddings=embeddings,
                                             tag_dictionary=tag_dictionary,
                                             tag_type=tag_type,
-                                            use_crf=use_crf,
-                                            relearn_embeddings=False)
+                                            use_crf=use_crf)
+                                            #relearn_embeddings=False)
 
     # load checkpoitns
     checkpoint = tagger.load_checkpoint(f'{resultdir}/best-model.pt')
 
     # 6. initialize trainer
     from flair.trainers import ModelTrainer
-
-    trainer = ModelTrainer.load_from_checkpoint(checkpoint, corpus)
-    trainer.final_test(Path(resultdir),
-        embeddings_in_memory=True,
-        evaluation_metric=EvaluationMetric.MICRO_F1_SCORE,
-        eval_mini_batch_size=32)
+    
+    trainer: ModelTrainer = ModelTrainer.load_from_checkpoint(checkpoint, corpus)
+    score = trainer.final_test(base_path=Path(resultdir),
+                       #embeddings_in_memory=True, 
+                       #evaluation_metric=EvaluationMetric.MICRO_F1_SCORE,
+                       eval_mini_batch_size=32)
     
     f1_scores = []
     exact_match_scores = []
-    f1_scores.append(EvaluationMetric.MACRO_F1_SCORE)
-    print("MACRO_F1_SCORE")
-    print(EvaluationMetric.MACRO_F1_SCORE)
-    print("MICRO_F1_SCORE")
-    print(EvaluationMetric.MICRO_F1_SCORE)
+    f1_scores.append(score)
     return f1_scores, exact_match_scores
 
 #if __name__ == "__main__":

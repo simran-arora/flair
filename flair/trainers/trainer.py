@@ -385,8 +385,8 @@ class ModelTrainer:
     def final_test(
         self,
         base_path: Path,
-        embeddings_in_memory: bool,
-        evaluation_metric: EvaluationMetric,
+        embeddings_in_memory: bool = True,
+        evaluation_metric: EvaluationMetric = EvaluationMetric.MACRO_F1_SCORE,
         eval_mini_batch_size: int,
         num_workers: int = 8,
     ):
