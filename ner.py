@@ -9,7 +9,7 @@ import argparse
 from pathlib import Path
 from flair.training_utils import EvaluationMetric
 
-def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False, lr=0.1, finetune=True):
+def train_ner(embedding, resultdir, datadir, use_crf=False, lr=0.1, finetune=True):
     # 1. get the corpus
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
@@ -51,7 +51,7 @@ def train_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False, lr
                 max_epochs=150,
                 monitor_test=True)
 
-def eval_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False):
+def eval_ner(embedding, resultdir, datadir, use_crf=False):
     # 1. get the corpus
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
@@ -88,10 +88,12 @@ def eval_ner(embedding, resultdir, datadir='resources/tasks', use_crf=False):
     from flair.trainers import ModelTrainer
 
     trainer = ModelTrainer.load_from_checkpoint(checkpoint, corpus)
-    trainer.final_test(Path(resultdir),
+    micro_f1_score = trainer.final_test(Path(resultdir),
         embeddings_in_memory=True,
         evaluation_metric=EvaluationMetric.MICRO_F1_SCORE,
         eval_mini_batch_size=32)
+
+    return micro_f1_score
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="")

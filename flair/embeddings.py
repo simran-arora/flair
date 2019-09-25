@@ -297,11 +297,13 @@ class WordEmbeddings(TokenEmbeddings):
                 )
             except:
                 # load embeddings without header
+                print('In except block: converting globe to word2vec')
                 tmp_file = tempfile.NamedTemporaryFile().name
                 _ = gensim.scripts.glove2word2vec.glove2word2vec(str(embeddings), tmp_file)
                 self.precomputed_word_embeddings = gensim.models.KeyedVectors.load_word2vec_format(
                     tmp_file, binary=False
                 )
+	        print('End of except block')
         else:
             self.precomputed_word_embeddings = gensim.models.KeyedVectors.load(
                 str(embeddings)
