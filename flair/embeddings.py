@@ -292,18 +292,24 @@ class WordEmbeddings(TokenEmbeddings):
         elif str(embeddings).endswith(".txt") or str(embeddings).endswith(".c") or str(embeddings).endswith(".c_same_range"):
             try:
                 # try to load embeddings with header
-                self.precomputed_word_embeddings = gensim.models.KeyedVectors.load_word2vec_format(
-                    str(embeddings), binary=False
-                )
-            except:
+                #self.precomputed_word_embeddings = gensim.models.KeyedVectors.load_word2vec_format(
+                #    str(embeddings), binary=False
+                #)
+            	#except:
                 # load embeddings without header
                 print('In except block: converting globe to word2vec')
+	        #f = open(embeddings, "r+b")
+		#embeddings.seek(0)
+	        #glove_file = datapath(embeddings)
                 tmp_file = tempfile.NamedTemporaryFile().name
+		#tmp_file.seek(0)
                 _ = gensim.scripts.glove2word2vec.glove2word2vec(str(embeddings), tmp_file)
                 self.precomputed_word_embeddings = gensim.models.KeyedVectors.load_word2vec_format(
                     tmp_file, binary=False
                 )
 	        print('End of except block')
+            except:
+		print("except")
         else:
             self.precomputed_word_embeddings = gensim.models.KeyedVectors.load(
                 str(embeddings)

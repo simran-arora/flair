@@ -8,8 +8,10 @@ import torch
 import argparse
 from pathlib import Path
 from flair.training_utils import EvaluationMetric
+import gensim
+import tempfile
 
-def train_ner(embedding, resultdir, datadir, use_crf=False, lr=0.1, finetune=True):
+def train_ner(embed_path, resultdir, datadir, use_crf=False, lr=0.1, finetune=True):
     # 1. get the corpus
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
@@ -22,9 +24,35 @@ def train_ner(embedding, resultdir, datadir, use_crf=False, lr=0.1, finetune=Tru
     print(tag_dictionary.idx2item)
 
     # 4. initialize embeddings
-    embedding_types: List[TokenEmbeddings] = [
+    #ATTEMPT 1
+    #embedding, wordlist = load_embeddings(embed_path)
+    #with open(embed_path, 'rb') as f:
+    #	embed = pickle.load(f, encoding='bytes')
 
-        WordEmbeddings(embedding)
+    
+    #ATTEMPT 2	
+    #embedding, wordlist = load_embeddings(embed_path)
+    #save_path = resultdir + "/embedding.kv"
+    #save_embeddings(save_path, embedding, wordlist)
+    #f = open(embed_path, 'r', encoding='utf-8')
+    #content=f.read()
+    #f.close()
+    #print("opened as utf-8")
+    #f = open(save_path, 'w', encoding='latin1', errors='ignore')
+    #f.write(content)
+    #f.close()
+    #print("saved as latin1")
+
+
+    #ATTEMPT 3
+    #f = open(embed_path, 'r')
+    #gensim.utils.SaveLoad.save(embed_path)
+    #gensim.models.KeyedVectors.load(save_path)
+    
+    print("made it past first gensim call")
+    embedding_types: List[TokenEmbeddings] = [
+       	WordEmbeddings(embed_path)
+	#gensim.KeyedVectors.load_word2vec_format(datapath(save_path), binary=False)
     ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
@@ -66,7 +94,7 @@ def eval_ner(embedding, resultdir, datadir, use_crf=False):
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
 
-        WordEmbeddings(embedding),
+        gensim.models.KeyedVectors.load(str(embeddings))
     ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
@@ -94,6 +122,54 @@ def eval_ner(embedding, resultdir, datadir, use_crf=False):
         eval_mini_batch_size=32)
 
     return micro_f1_score
+
+def load_embeddings(path):
+    """
+    Loads a GloVe or FastText format embedding at specified path. Returns a
+    vector of strings that represents the vocabulary and a 2-D numpy matrix that
+    is the embeddings.
+    """
+    with open(path, 'r', encoding='utf8') as f:
+        lines = f.readlines()
+        wordlist = []
+        embeddings = []
+        if is_fasttext_format(lines): lines = lines[1:]
+        for line in lines:
+            row = preprocess_embedding_file_line(line)
+            # if '<Lua heritage>' in line: # this is the special case for translation iwslt14 task embedding
+            #     row = ['<Lua heritage>'] + line.strip('\n').split(' ')[2:]
+            # else:
+            #     row = line.strip('\n').split(' ')
+            wordlist.append(row.pop(0))
+            embeddings.append([float(i) for i in row])
+        embeddings = np.array(embeddings)
+    assert len(wordlist) == embeddings.shape[0], 'Embedding dim must match wordlist length.'
+    return embeddings, wordlist
+
+def is_fasttext_format(lines):
+    first_line = lines[0].strip('\n').split(' ')
+    return len(first_line) == 2 and first_line[0].isdigit() and first_line[1].isdigit()
+
+def preprocess_embedding_file_line(line, for_fairseq=False):
+    if '<Lua heritage>' in line: # this is the special case for translation iwslt14 task embedding
+        if for_fairseq:
+            # we add this branch, because we want to strictly follow the preprocessing in the parse embedding function in fairseq utils.py
+            row = ['<Lua heritage>'] + line.rstrip().split(" ")[2:]            
+        else:
+            row = ['<Lua heritage>'] + line.strip('\n').split(' ')[2:]
+    else:
+        if for_fairseq:
+            row = line.rstrip().split(" ")
+        else:
+            row = line.strip('\n').split(' ')
+    return row
+
+def save_embeddings(path, embeds, wordlist):
+    ''' save embeddings in text file format'''
+    with open(path, 'w', encoding='latin1', errors="ignore") as f:
+        for i in range(len(wordlist)):
+            strrow = ' '.join([str(embed) for embed in embeds[i,:]])
+            f.write('{} {}\n'.format(wordlist[i], strrow))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="")
