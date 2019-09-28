@@ -44,7 +44,7 @@ def train_ner(embed_path, resultdir, datadir, lr, use_crf=False, finetune=True):
     from flair.trainers import ModelTrainer
 
     trainer: ModelTrainer = ModelTrainer(tagger, corpus)
-
+    
     # 7. start training
     trainer.train(resultdir,
                 learning_rate=lr,
@@ -88,12 +88,12 @@ def eval_ner(embed_path, resultdir, datadir, use_crf=False):
     from flair.trainers import ModelTrainer
 
     trainer = ModelTrainer.load_from_checkpoint(checkpoint, corpus)
-    micro_f1_score = trainer.final_test(Path(resultdir),
+    dev_micro_f1_score, test_micro_f1_score = trainer.final_test(Path(resultdir),
         embeddings_in_memory=True,
         evaluation_metric=EvaluationMetric.MICRO_F1_SCORE,
         eval_mini_batch_size=32)
 
-    return micro_f1_score
+    return dev_micro_f1_score, test_micro_f1_score
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="")

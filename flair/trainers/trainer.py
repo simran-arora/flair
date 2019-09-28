@@ -441,9 +441,10 @@ class ModelTrainer:
                 )
 
         # get and return the final test score of best model
-        final_score = test_results.main_score
+        dev_final_score = dev_results.main_score
+        test_final_score = test_results.main_score
 
-        return final_score
+        return dev_final_score, test_final_score
 
     @classmethod
     def load_from_checkpoint(
