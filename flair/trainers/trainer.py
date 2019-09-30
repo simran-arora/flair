@@ -239,7 +239,7 @@ class ModelTrainer:
                 result_line: str = ""
 
                 if log_train:
-                    train_eval_result, train_loss = self.model.evaluate(
+                    train_eval_result, train_loss, subclass_scores = self.model.evaluate(
                         self.corpus.train,
                         eval_mini_batch_size,
                         embeddings_in_memory,
@@ -248,7 +248,7 @@ class ModelTrainer:
                     result_line += f"\t{train_eval_result.log_line}"
 
                 if log_dev:
-                    dev_eval_result, dev_loss = self.model.evaluate(
+                    dev_eval_result, dev_loss, subclass_scores = self.model.evaluate(
                         self.corpus.dev,
                         eval_mini_batch_size,
                         embeddings_in_memory,
@@ -266,7 +266,7 @@ class ModelTrainer:
                     current_score = dev_eval_result.main_score
 
                 if log_test:
-                    test_eval_result, test_loss = self.model.evaluate(
+                    test_eval_result, test_loss, subclass_scores = self.model.evaluate(
                         self.corpus.test,
                         eval_mini_batch_size,
                         embeddings_in_memory,
@@ -402,7 +402,7 @@ class ModelTrainer:
             self.model = self.model.load(base_path / "best-model.pt")
 
         log.info("Dev results ...")
-        dev_results, dev_loss = self.model.evaluate(
+        dev_results, dev_loss, dev_subclass_scores = self.model.evaluate(
             self.corpus.dev,
             eval_mini_batch_size=eval_mini_batch_size,
             embeddings_in_memory=embeddings_in_memory,
@@ -416,7 +416,7 @@ class ModelTrainer:
         log_line(log)
 
         log.info("Test results ...")
-        test_results, test_loss = self.model.evaluate(
+        test_results, test_loss, test_subclass_scores = self.model.evaluate(
             self.corpus.test,
             eval_mini_batch_size=eval_mini_batch_size,
             embeddings_in_memory=embeddings_in_memory,
@@ -443,8 +443,12 @@ class ModelTrainer:
         # get and return the final test score of best model
         dev_final_score = dev_results.main_score
         test_final_score = test_results.main_score
+        dev_PER_score = dev_subclass_scores['PER']
+        dev_ORG_score = dev_subclass_scores['ORG']
+        dev_LOC_score = dev_subclass_scores['LOC']
+        dev_MISC_score = dev_subclass_scores['MISC']
 
-        return dev_final_score, test_final_score
+        return dev_final_score, test_final_score, dev_PER_score, dev_ORG_score, dev_LOC_score, dev_MISC_score
 
     @classmethod
     def load_from_checkpoint(
