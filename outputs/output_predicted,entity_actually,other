@@ -1,0 +1,2267 @@
+PATH:
+/proj/smallfry/embeddings/glove400k/2019-08-28-randV1/embeddim,300_compresstype,random_seed,1_randembeddim,800/ner_ler_0.1/dev.tsv
+
+FORMAT ERRORS:
+['Word', 'True tag', 'Predicted tag', 'Prediction confidence', 'Total occurrences of word in dataset', 'Erroneous predictions of word']
+
+SUMMARY STATISTICS:
+Total words (note not just entities): 51578
+Unique words: 9967
+Words that appeared 1x: 5602
+Words that appeared 2x: 1637
+Words that appeared 3x: 727
+Words that appeared 4x: 487
+
+Total entities: 8603
+Unique entities: 3277
+Entities that appeared 1x: 1845
+Entities that appeared 2x: 606
+Entities that appeared 3x: 254
+Entities that appeared 4x: 154
+
+Total errors: 1931
+Unique errors: 1324
+Errors on word that appeared 1x: 1008
+Errors on word that appeared 2x: 186
+Errors on word that appeared 3x: 64
+Errors on word that appeared 4x: 28
+
+
+PATH:
+/proj/smallfry/embeddings/glove400k/2018-11-29-fiveSeeds/seed,1_embeddim,300_compresstype,nocompress_bitrate,32/ner_ler_0.1/dev.tsv
+
+FORMAT ERRORS:
+['Word', 'True tag', 'Predicted tag', 'Prediction confidence', 'Total occurrences of word in dataset', 'Erroneous predictions of word']
+
+SUMMARY STATISTICS:
+Total words (note not just entities): 51578
+Unique words: 9967
+Words that appeared 1x: 5602
+Words that appeared 2x: 1637
+Words that appeared 3x: 727
+Words that appeared 4x: 487
+
+Total entities: 8603
+Unique entities: 3277
+Entities that appeared 1x: 1845
+Entities that appeared 2x: 606
+Entities that appeared 3x: 254
+Entities that appeared 4x: 154
+
+Total errors: 1083
+Unique errors: 744
+Errors on word that appeared 1x: 570
+Errors on word that appeared 2x: 95
+Errors on word that appeared 3x: 41
+Errors on word that appeared 4x: 17
+
+
+ At the Oval , Surrey captain Chris Lewis , another man dumped by England , continued to silence his critics as he followed his four for 45 on Thursday with 80 not out on Friday in the match against Warwickshire .
+PATH 1:
+the, O, B-LOC, 0.6524526476860046, 1884, 4
+
+PATH 2:
+the, O, B-LOC, 0.7929764986038208, 1884, 4
+
+
+*********************************************
+
+ By the close Yorkshire had turned that into a 37-run advantage but off-spinner Such had scuttled their hopes , taking four for 24 in 48 balls and leaving them hanging on 119 for five and praying for rain .
+PATH 1:
+
+PATH 2:
+off-spinner, O, S-PER, 0.5471341609954834, 1, 1
+
+
+*********************************************
+
+ West Indian all-rounder Phil Simmons took four for 38 on Friday as Leicestershire beat Somerset by an innings and 39 runs in two days to take over at the head of the county championship .
+PATH 1:
+county, O, B-MISC, 0.49422281980514526, 7, 3
+championship, O, E-MISC, 0.5551210045814514, 21, 3
+
+PATH 2:
+
+
+*********************************************
+
+ Chester-le-Street : Glamorgan 259 and 207 ( A. Dale 69 , H. Morris 69 ; D. Blenkiron 4-43 ) , Durham 114 ( S. Watkin 4-28 ) and 81-3 .
+PATH 1:
+
+PATH 2:
+81-3, O, S-ORG, 0.27744197845458984, 1, 1
+
+
+*********************************************
+
+ Chesterfield : Worcestershire 238 and 133-5 , Derbyshire 471 ( J. Adams 123 , T.O'Gorman 109 not out , K. Barnett 87 ; T. Moody 6-82 )
+PATH 1:
+123, O, E-PER, 0.49712955951690674, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Portsmouth : Middlesex 199 and 426 ( J. Pooley 111 , M. Ramprakash 108 , M. Gatting 83 ) , Hampshire 232 and 109-5 .
+PATH 1:
+109-5, O, S-ORG, 0.5053198337554932, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Tunbridge Wells : Nottinghamshire 214 ( P. Johnson 84 ; M. McCague 4-55 ) , Kent 108-3 .
+PATH 1:
+
+PATH 2:
+108-3, O, E-PER, 0.7690050005912781, 1, 1
+
+
+*********************************************
+
+ Shearer takes the captaincy on a trial basis , but new coach Glenn Hoddle said he saw no reason why the former Blackburn and Southampton skipper should not make the post his own .
+PATH 1:
+skipper, O, E-PER, 0.5029239654541016, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ July 19-21 v Middlesex ( three days )
+PATH 1:
+19-21, O, S-ORG, 0.677987813949585, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ LOS ANGELES 72 61 .541 2
+PATH 1:
+.541, O, S-ORG, 0.5687253475189209, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Tarango , whose Wimbledon tantrum two years ago brought him a $ 28,000 fine and suspension from this year 's tournament at the All-England Club , argued calls and taunted fans in his lively two hour , 24 minute tango with Rios on the grandstand .
+PATH 1:
+argued, O, B-PER, 0.4612385928630829, 2, 1
+calls, O, E-PER, 0.6013121604919434, 4, 1
+grandstand, O, S-MISC, 0.5080223679542542, 2, 2
+
+PATH 2:
+
+
+*********************************************
+
+ The 11th-seeded Washington fell short of reprising his Wimbledon miracle comeback as he lost to red-hot wildcard Alex O'Brien 6-3 6-4 5-7 3-6 6-3 in a two hour 51 minute struggle on the Stadium court .
+PATH 1:
+Stadium, O, B-LOC, 0.5148496031761169, 1, 1
+court, O, E-LOC, 0.9497676491737366, 11, 1
+
+PATH 2:
+Stadium, O, B-LOC, 0.8433507084846497, 1, 1
+court, O, E-LOC, 0.7353658676147461, 11, 1
+
+
+*********************************************
+
+ Next door on the grandstand , 10th seed Rios lost to another player with a Wimbledon connection -- bad boy Jeff Tarango .
+PATH 1:
+grandstand, O, S-MISC, 0.42122095823287964, 2, 2
+
+PATH 2:
+
+
+*********************************************
+
+ " I would like to thank the Eagles organisation and the wonderful fans of Philadelphia for supporting me throughout my career , " Cunningham said .
+PATH 1:
+
+PATH 2:
+organisation, O, E-ORG, 0.5036504864692688, 5, 1
+
+
+*********************************************
+
+ If tennis was like that every day , I think everybody wold be having a lot more fun . "
+PATH 1:
+
+PATH 2:
+wold, O, S-PER, 0.718974769115448, 1, 1
+
+
+*********************************************
+
+ NFL AMERICAN FOOTBALL-RANDALL CUNNINGHAM RETIRES .
+PATH 1:
+RETIRES, O, E-PER, 0.5046102404594421, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ the $ 1.2 million Greater Milwaukee Open at the par-71 ,
+PATH 1:
+par-71, O, S-LOC, 0.358292818069458, 1, 1
+
+PATH 2:
+par-71, O, S-LOC, 0.34729453921318054, 1, 1
+
+
+*********************************************
+
+ 6,739-yard Brown Deer Park Golf Course after the first round
+PATH 1:
+6,739-yard, O, B-PER, 0.594115138053894, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Spanish first division team Deportivo Coruna will be without key midfielder Mauro Silva for Saturday 's game with Real Madrid after FIFA , soccer 's world governing body , suspended the Brazilian for one game for missing his national side 's European tour .
+PATH 1:
+tour, O, E-MISC, 0.9274922609329224, 6, 1
+
+PATH 2:
+tour, O, E-MISC, 0.5692628622055054, 6, 1
+
+
+*********************************************
+
+ Watched by an array of former Olympic sprint champions at the Berlin grand prix meeting , Mitchell made a brilliant start in the 100 metres and held off Bailey 's strong finish to win in 10.08 seconds despite cool conditions .
+PATH 1:
+grand, O, B-MISC, 0.7769044041633606, 4, 4
+prix, O, E-MISC, 0.9608170986175537, 2, 2
+
+PATH 2:
+grand, O, B-MISC, 0.8679444789886475, 4, 4
+prix, O, E-MISC, 0.64544278383255, 2, 2
+
+
+*********************************************
+
+ Jamaica 's Michael Green was second with 10.09 with Bailey finishing in 10.13 .
+PATH 1:
+10.13, O, S-LOC, 0.5377689003944397, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ 5. Patrick Stevens ( Belgium ) 20.54
+PATH 1:
+20.54, O, S-ORG, 0.8847138285636902, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ 5. Marko Koers ( Netherlands ) 3:53.47
+PATH 1:
+3:53.47, O, S-ORG, 0.7547591924667358, 1, 1
+
+PATH 2:
+3:53.47, O, S-ORG, 0.5076814889907837, 1, 1
+
+
+*********************************************
+
+ 7. Linda Kisabaka ( Germany ) 52.41
+PATH 1:
+52.41, O, S-ORG, 0.8332839012145996, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Atlanta Games silver medal winner Edwards has called on other leading athletes to take part in the Sarajevo meeting -- a goodwill gesture towards Bosnia as it recovers from the war in the Balkans -- two days after the grand prix final in Milan .
+PATH 1:
+grand, O, B-MISC, 0.5628227591514587, 4, 4
+prix, O, E-MISC, 0.9641128182411194, 2, 2
+
+PATH 2:
+grand, O, B-MISC, 0.9141799807548523, 4, 4
+prix, O, E-MISC, 0.9465636610984802, 2, 2
+
+
+*********************************************
+
+ The International Amateur Athletic Federation said on Friday that a schedule reshuffle had allowed organisers to hold a men 's triple jump as well as the women 's long jump on the " one usable runway at the war-devastated " Kosevo stadium .
+PATH 1:
+
+PATH 2:
+stadium, O, E-LOC, 0.411365807056427, 7, 1
+
+
+*********************************************
+
+ The move to Bergamo-based Atalanta reunites Lentini , who fell out with ex-Milan coach Fabio Capello last season , with his former coach at Torino , Emiliano Mondonico .
+PATH 1:
+reunites, O, I-PER, 0.6606753468513489, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ 9-0-49-1 , Muralitharan 10-0-41-2 , Jayasuriya 10-0-43-2 , Chandana
+PATH 1:
+9-0-49-1, O, S-PER, 0.5833390355110168, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ D. Lehmann st Kaluwitharana b Chandana 2
+PATH 1:
+st, O, B-ORG, 0.571903645992279, 3, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Bowling : S. Waugh 5-1-36-1 , Law 2-0-23-0 , McGrath 9.5-0-44-1 ,
+PATH 1:
+2-0-23-0, O, E-PER, 0.8524820804595947, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Fleming 8-1-26-3 , Gillespie 6-0-27-0 , M. Waugh 5-0-29-0 , Lehmann
+PATH 1:
+8-1-26-3, O, E-PER, 0.9183122515678406, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ overs cricket match in the Singer world series tournament on
+PATH 1:
+world, O, I-MISC, 0.942207932472229, 30, 1
+series, O, E-MISC, 0.9430786371231079, 10, 1
+
+PATH 2:
+world, O, I-MISC, 0.9624453186988831, 30, 1
+series, O, E-MISC, 0.8723931312561035, 10, 1
+
+
+*********************************************
+
+ 6-0-26-0 , Bevan 4-0-18-0 .
+PATH 1:
+
+PATH 2:
+4-0-18-0, O, E-PER, 0.731425940990448, 1, 1
+
+
+*********************************************
+
+ Comelf 's six-month output rose to 4,378 tonnes of equipment from 2,684 tonnes in the equivalent period in 1995 , the company report to the Bucharest stock exchange showed .
+PATH 1:
+stock, O, I-ORG, 0.9887810945510864, 15, 2
+exchange, O, E-ORG, 0.9626388549804688, 2, 2
+
+PATH 2:
+stock, O, I-ORG, 0.6352814435958862, 15, 3
+exchange, O, E-ORG, 0.9058477878570557, 2, 2
+
+
+*********************************************
+
+ The government of Canada 's cash balances fell in the week that ended August 28 , the Bank of Canada said on Friday .
+PATH 1:
+
+PATH 2:
+government, O, B-ORG, 0.964125394821167, 45, 1
+of, O, I-ORG, 0.7592959403991699, 892, 16
+
+
+*********************************************
+
+ Jones Medical Industries Inc said Friday it completed the acquisition of Daniels Pharmaceuticals Inc of St. Petersburg , Fla. , for about 2,960,000 shares of Jones common stock .
+PATH 1:
+
+PATH 2:
+common, O, I-ORG, 0.6606208682060242, 4, 1
+stock, O, E-ORG, 0.8444341421127319, 15, 3
+
+
+*********************************************
+
+ Notes in circulation 27.35 +0.435 +0.237
+PATH 1:
+circulation, O, S-LOC, 0.44217953085899353, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ M3 482.13 480.72 461.42
+PATH 1:
+M3, O, S-LOC, 0.9515560865402222, 1, 1
+480.72, O, S-LOC, 0.5471881031990051, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ At the end of pit trade , December bonds were off 27/32 at 106-25/32 , 10-year notes down 21/32 at 105-17/32 , munibonds off 17/32 at 111-20/32 , December Eurodollars were down 11 bps at 93.94 , March Eurodollars were off 13 bps at 93.72 and March T-bills were down 12 bps at 94.33 .
+PATH 1:
+111-20/32, O, S-LOC, 0.5666220188140869, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ However , December T-bonds ended below a major trendline level at 106-26/32 , as the yield in the cash bond market set its highest monthly close since April 1995 at 7.12 percent , one analyst said .
+PATH 1:
+106-26/32, O, S-LOC, 0.7093209624290466, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Family-controlled Douglas & Lomason , which had 1995 revenue of $ 561 million , was finding it more difficult to compete for new seating contracts from vehicle makers , said James Hoey , chief financial officer .
+PATH 1:
+
+PATH 2:
+Family-controlled, O, B-ORG, 0.6631665229797363, 1, 1
+
+
+*********************************************
+
+ Trade was very quiet with only one deal reported when spot high protein soymeal fetched 215 stg a tonne ex-store on the south coast .
+PATH 1:
+south, O, B-LOC, 0.46082603931427, 8, 3
+coast, O, E-LOC, 0.3606545329093933, 4, 1
+
+PATH 2:
+south, O, B-LOC, 0.4538111686706543, 8, 4
+coast, O, E-LOC, 0.7057397961616516, 4, 1
+
+
+*********************************************
+
+ A sharp plunge in U.S. Treasuries after a shock rise in the Chicago PMI pulled gilts lower , but traders said the market was nervous anyway ahead of August MO data and the PMI survey due on Monday .
+PATH 1:
+
+PATH 2:
+PMI, O, S-ORG, 0.4817500710487366, 2, 2
+
+
+*********************************************
+
+ GERMANY - Bunds extended losses , flirting with session lows after falling victim to sharply higher U.S. economic data which revived fears that interest rates may soon turn higher .
+PATH 1:
+Bunds, O, S-MISC, 0.9676240682601929, 1, 1
+
+PATH 2:
+Bunds, O, S-MISC, 0.8701311349868774, 1, 1
+
+
+*********************************************
+
+ ITALY - Bond futures held to easier levels in late afternoon after the sharp drop in Treasuries , but a resilient lira helped limit BTP losses .
+PATH 1:
+
+PATH 2:
+BTP, O, S-ORG, 0.500400185585022, 1, 1
+
+
+*********************************************
+
+ The September notional bond future on the MATIF in Paris settled at 123.14 , up 0.04 from Thursday 's settlement price .
+PATH 1:
+
+PATH 2:
+MATIF, O, S-ORG, 0.4656282663345337, 1, 1
+
+
+*********************************************
+
+ Former world heavyweight champion Frank Bruno has quit the ring on medical advice , Britain 's Sun newspaper reported on Friday .
+PATH 1:
+
+PATH 2:
+newspaper, O, E-ORG, 0.5317479372024536, 19, 1
+
+
+*********************************************
+
+ BRITAIN - Gilts struggled off the day 's lows but ended 10/32 down on the day .
+PATH 1:
+
+PATH 2:
+Gilts, O, S-PER, 0.6863042116165161, 1, 1
+
+
+*********************************************
+
+ Workers at Driefontein Consolidated Ltd 's east gold mine have failed to report for work since Wednesday night , mine managers Gold Fields of South Africa Ltd said on Friday .
+PATH 1:
+east, O, B-LOC, 0.4647522568702698, 7, 1
+gold, O, E-LOC, 0.7381146550178528, 9, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Soccer - McCarthy names team to play Liechtenstein .
+PATH 1:
+names, O, S-MISC, 0.7417900562286377, 3, 3
+
+PATH 2:
+
+
+*********************************************
+
+ Nigerian thieves hire police truck to carry loot .
+PATH 1:
+hire, O, S-MISC, 0.6423125863075256, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ " Angry students cut the telephone , water and electricity of the university offices before smashing the windows and breaking down the doors . "
+PATH 1:
+windows, O, S-MISC, 0.6811948418617249, 2, 2
+
+PATH 2:
+windows, O, S-MISC, 0.7337783575057983, 2, 1
+
+
+*********************************************
+
+ The new constitution calls for a two-chamber parliament with a 110-seat majority-elected house of representatives and a regionally-represented senate with a third of its members named by the president .
+PATH 1:
+house, O, B-ORG, 0.7904011607170105, 3, 1
+of, O, I-ORG, 0.8712002635002136, 892, 20
+representatives, O, E-ORG, 0.9954309463500977, 3, 1
+senate, O, S-ORG, 0.9984906911849976, 1, 1
+
+PATH 2:
+110-seat, O, S-LOC, 0.34453609585762024, 1, 1
+house, O, B-ORG, 0.7305653691291809, 3, 1
+of, O, I-ORG, 0.5218164324760437, 892, 16
+representatives, O, E-ORG, 0.8347058296203613, 3, 1
+senate, O, S-ORG, 0.9502207636833191, 1, 1
+
+
+*********************************************
+
+ -- Amra Kevic , Belgrade newsroom +381 11 2224305
+PATH 1:
+newsroom, O, E-ORG, 0.6256584525108337, 6, 1
+
+PATH 2:
+newsroom, O, E-ORG, 0.7992231845855713, 6, 2
+
+
+*********************************************
+
+ But during his period in office he has battled against nationalist opponents , trade unions and parliament and Sharetsky said the current parliament was ready to try to impeach him .
+PATH 1:
+
+PATH 2:
+impeach, O, S-PER, 0.5339510440826416, 1, 1
+
+
+*********************************************
+
+ Tajik government troops now control of the strategically vital town of Tavildara after driving out Islamic rebels , but sporadic gunfire still echoed in the nearby Pamir mountains on Friday .
+PATH 1:
+mountains, O, E-LOC, 0.965509831905365, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Tavildara , 200 km ( 120 miles ) east of the capital Dushanbe , was in ruins .
+PATH 1:
+ruins, O, S-LOC, 0.4968620240688324, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Shells had smashed roofs and windows and empty shell cases littered the streets .
+PATH 1:
+windows, O, S-MISC, 0.36539414525032043, 2, 2
+
+PATH 2:
+
+
+*********************************************
+
+ Yastrzhembsky said Yeltsin had travelled from the hospital to spend the night at the Barvikha sanatorium outside Moscow .
+PATH 1:
+sanatorium, O, E-LOC, 0.5344029068946838, 1, 1
+
+PATH 2:
+sanatorium, O, E-LOC, 0.7173720598220825, 1, 1
+
+
+*********************************************
+
+ Cofinec 's Global Depositary Receipts ( GDRs ) opened at 5,200 forints on the BSE , down 600 from Thursday 's close , following the release of its first half results this morning .
+PATH 1:
+
+PATH 2:
+GDRs, O, S-MISC, 0.6547861695289612, 2, 1
+
+
+*********************************************
+
+ The Supreme Court had on August 23 sent the opposition Khmer Nation Party steering committee member to jail after upholding rulings by the municipal and appeal courts that handed down a five million riels ( $ 2,000 ) fine and one year 's imprisonment .
+PATH 1:
+
+PATH 2:
+steering, O, I-ORG, 0.5645319819450378, 1, 1
+committee, O, E-ORG, 0.6521066427230835, 7, 1
+
+
+*********************************************
+
+ " These are powerful weapons , " a spokesman with the Municipal Police told Reuters by telephone , adding that police had not ruled out a possible terrorist attack on the ornate Casa de Narino presidential palace in Bogota 's historic downtown area .
+PATH 1:
+presidential, O, I-LOC, 0.4877564013004303, 10, 1
+palace, O, E-LOC, 0.5780246257781982, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Hen Vipheak , former editor of the Sereipheap Thmei ( New Liberty ) newspaper , stepped through the gates of the run-down French colonial-era T3 prison late Friday afternoon , following intervention on his behalf by King Sihanouk .
+PATH 1:
+colonial-era, O, I-LOC, 0.6911951303482056, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Sihanouk promised an amnesty to Hen Vipheak , along with fellow KNP member and journalist Chan Rattana , who was released after serving a week of a year-long jail term in June .
+PATH 1:
+member, O, S-PER, 0.5582156777381897, 6, 1
+
+PATH 2:
+
+
+*********************************************
+
+ The police spokeman said plastic explosive like C-4 is not a normal component in claymore mines .
+PATH 1:
+
+PATH 2:
+spokeman, O, S-ORG, 0.5336729288101196, 1, 1
+claymore, O, S-LOC, 0.29420024156570435, 2, 1
+
+
+*********************************************
+
+ Green flags and banners praise the " great revolution " and promise defiance against United Nations sanctions imposed for Libya 's refusal to hand over for trial two suspects wanted in connection with the 1988 bombing of a Pan Am flight over Lockerbie , Scotland .
+PATH 1:
+great, O, B-MISC, 0.8172097206115723, 15, 1
+revolution, O, E-MISC, 0.7333784699440002, 5, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Silver , basis the September contract on New York 's Comex market , was expected to find support at between $ 5.12 - $ 5.15 an ounce and meet resistance from $ 5.25 - $ 5.30 , they added .
+PATH 1:
+Comex, O, S-MISC, 0.740966260433197, 1, 1
+
+PATH 2:
+Comex, O, S-ORG, 0.5377666354179382, 1, 1
+
+
+*********************************************
+
+ Ronald Reagan 's tax cut won him a second four-year term in the White House in 1984 , while Democrat Walter Mondale , who promised higher taxes , lost .
+PATH 1:
+1984, O, S-LOC, 0.6965274810791016, 3, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Economist Joel Naroff of First Union bank in Philadelphia said consumer spending , which fuels two-thirds of the nation 's economy , may be much slower in the third quarter than in the first half , which should slow economic growth .
+PATH 1:
+
+PATH 2:
+bank, O, E-ORG, 0.4729393720626831, 9, 1
+
+
+*********************************************
+
+ A separate report from Chicago area purchasing managers underlined the strength in manufacturing as the group 's barometer of manufacturing in the region jumped to 60 in August from 51.2 in July .
+PATH 1:
+managers, O, S-PER, 0.4033954441547394, 5, 1
+
+PATH 2:
+
+
+*********************************************
+
+ July 's slight gain in incomes was the weakest in six months , since January when they were flat .
+PATH 1:
+incomes, O, S-LOC, 0.662142276763916, 4, 2
+
+PATH 2:
+
+
+*********************************************
+
+ " From a common-sense view , the department should reconsider this plan , but due to politics they will probably go ahead with this , " said Tom Bellamore of the California avocado group .
+PATH 1:
+avocado, O, I-ORG, 0.8610984683036804, 4, 1
+group, O, E-ORG, 0.9369076490402222, 60, 1
+
+PATH 2:
+
+
+*********************************************
+
+ The plan has raised a storm of protest from U.S. avocado growers , who are largely concentrated in California .
+PATH 1:
+growers, O, S-PER, 0.5153865218162537, 4, 1
+
+PATH 2:
+
+
+*********************************************
+
+ U.S. Cardinal Bernardin says has terminal cancer .
+PATH 1:
+
+PATH 2:
+Cardinal, O, B-PER, 0.551090657711029, 3, 2
+
+
+*********************************************
+
+ The spare , soft-spoken son of an Italian stonecutter took over the Chicago archdiocese , the nation 's second-largest after Los Angeles , with 2.3 million parishioners , in 1982 .
+PATH 1:
+archdiocese, O, E-ORG, 0.6820977330207825, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ " It focuses more attention on Mercantile , Commerce and Roosevelt , " said James Weber , analyst at A.G. Edwards & Sons .
+PATH 1:
+
+PATH 2:
+., O, E-ORG, 0.6379276514053345, 1874, 3
+
+
+*********************************************
+
+ Bernardin steadfastly denied the charges and the former student later recanted his tale of abuse .
+PATH 1:
+steadfastly, O, E-PER, 0.6903731822967529, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ He said he would " serve until the end " as cardinal .
+PATH 1:
+
+PATH 2:
+cardinal, O, S-PER, 0.34356847405433655, 1, 1
+
+
+*********************************************
+
+ That refusal led to the imposition of U.N. sanctions on Libya .
+PATH 1:
+refusal, O, S-PER, 0.9796202778816223, 3, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Mercantile and Commerce did not return phone calls seeking comment .
+PATH 1:
+
+PATH 2:
+and, O, I-ORG, 0.8029698133468628, 747, 6
+
+
+*********************************************
+
+ U.S. Gulf rig down by one to 162 in week .
+PATH 1:
+rig, O, E-MISC, 0.70647794008255, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ The piece of hull , lifted from the ocean floor by means of several diesel-filled bags , had been stuck about 200 feet ( about 70 metres ) below the water 's surface before it fell , she said .
+PATH 1:
+ocean, O, S-LOC, 0.42798471450805664, 2, 2
+
+PATH 2:
+hull, O, S-LOC, 0.5193892121315002, 2, 1
+
+
+*********************************************
+
+ Equipment problems and mechanical failure forced a recovery expedition to give up efforts to retrieve a giant slab of the RMS Titanic from the ocean floor , a spokeswoman said on Friday .
+PATH 1:
+ocean, O, S-LOC, 0.2867015600204468, 2, 2
+
+PATH 2:
+ocean, O, B-LOC, 0.6638485193252563, 2, 1
+floor, O, E-LOC, 0.6374385356903076, 3, 1
+
+
+*********************************************
+
+ A Guinean man , detained in a round-up in the Saint-Bernard church a week ago , was deported on a scheduled Air France flight to Conakry after his appeals failed , a spokesman for Air France 's pro-Socialist CFDT union said .
+PATH 1:
+pro-Socialist, O, B-ORG, 0.41657862067222595, 1, 1
+union, O, E-ORG, 0.7117083072662354, 6, 2
+
+PATH 2:
+
+
+*********************************************
+
+ Separately , Juppe confirmed the conservative government was preparing to submit a draft bill to parliament to tighten laws on illegal workers as part of a crackdown on immigration .
+PATH 1:
+Separately, O, S-PER, 0.6034567952156067, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ He was apparently the eighth African deported from among 210 people evicted from the church after a 50-day occupation aimed at securing residence permits , unions said .
+PATH 1:
+eighth, O, B-MISC, 0.9612789154052734, 5, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Before Levy 's arrival in Bonn , German Defence Minister Volker Ruehe will visit Israel from September 2 to 4 , the defence ministry said .
+PATH 1:
+defence, O, B-ORG, 0.542644202709198, 8, 1
+ministry, O, E-ORG, 0.8839074373245239, 15, 1
+
+PATH 2:
+defence, O, B-ORG, 0.5607314109802246, 8, 1
+ministry, O, E-ORG, 0.9253981113433838, 15, 2
+
+
+*********************************************
+
+ The foreign ministry later announced Israeli Foreign Minister David Levy would visit Bonn for talks with his German counterpart Klaus Kinkel next month .
+PATH 1:
+
+PATH 2:
+foreign, O, B-ORG, 0.9221452474594116, 7, 1
+ministry, O, E-ORG, 0.5612687468528748, 15, 2
+
+
+*********************************************
+
+ " Legislation is insufficient in several areas , notably in those concerning illegal work , " Juppe told reporters .
+PATH 1:
+Legislation, O, S-PER, 0.6136061549186707, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Public prosecutors said they had found a list of children 's names and ages at the couple 's flat .
+PATH 1:
+names, O, S-MISC, 0.9903748631477356, 3, 3
+
+PATH 2:
+
+
+*********************************************
+
+ We have also found and arrested her aunt and companion , " said a spokeswoman of the Dutch criminal investigation service .
+PATH 1:
+criminal, O, B-ORG, 0.9723417162895203, 3, 1
+investigation, O, I-ORG, 0.9488738179206848, 4, 1
+service, O, E-ORG, 0.552031397819519, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Nickel rose by 500 to 39,200 rupees on thin supply and fresh buying by stainless steel makers .
+PATH 1:
+stainless, O, S-MISC, 0.5472435355186462, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ " I think this morning 's Canadian numbers were very supportive of narrower spreads , particularly the current account number , " said Jim Webber , director of fixed-income research with TD Securities Inc .
+PATH 1:
+
+PATH 2:
+fixed-income, O, B-ORG, 0.6242428421974182, 1, 1
+research, O, E-ORG, 0.4277035593986511, 3, 1
+
+
+*********************************************
+
+ Canadian bonds open softer , spreads to U.S. shrink .
+PATH 1:
+bonds, O, I-MISC, 0.847912609577179, 10, 1
+open, O, E-MISC, 0.9453352093696594, 3, 2
+
+PATH 2:
+bonds, O, I-MISC, 0.8803810477256775, 10, 1
+open, O, E-MISC, 0.7044215798377991, 3, 1
+
+
+*********************************************
+
+ Aw Computer Systems Inc Q2 loss widens .
+PATH 1:
+
+PATH 2:
+Aw, O, B-ORG, 0.5859181880950928, 1, 1
+
+
+*********************************************
+
+ IPO FILING -- Homegate Hospitality Inc .
+PATH 1:
+IPO, O, S-ORG, 0.6207099556922913, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Palestinian President Arafat , attacking Israel 's decision to expand Jewish settlements and its policy on Jerusalem , went before the Palestinian legislature on Wednesday to urge the two million Arabs in the West Bank and Gaza to go to the holy city .
+PATH 1:
+
+PATH 2:
+holy, O, B-LOC, 0.49285435676574707, 3, 1
+city, O, E-LOC, 0.5293410420417786, 28, 4
+
+
+*********************************************
+
+ An Israeli roadblock stopped the 38-year-old Palestinian from answering Yasser Arafat 's call to worship at Jerusalem 's al-Aqsa mosque on Friday .
+PATH 1:
+
+PATH 2:
+mosque, O, E-LOC, 0.5445908308029175, 1, 1
+
+
+*********************************************
+
+ We have signed a peace treaty with the Israelis but on the ground , we see that nothing has changed , " said 20-year-old Ali Ahmed from Qalandia refugee camp .
+PATH 1:
+20-year-old, O, B-PER, 0.8259271383285522, 4, 2
+
+PATH 2:
+
+
+*********************************************
+
+ ISSUE : Bldg auth ( law enforcement ctr ) Series 1996-A TAX STAT : Exempt-REV
+PATH 1:
+
+PATH 2:
+law, O, B-MISC, 0.7870824337005615, 14, 1
+enforcement, O, I-MISC, 0.5316635966300964, 2, 1
+ctr, O, E-MISC, 0.3541855216026306, 1, 1
+
+
+*********************************************
+
+ AMT : 1,200,000 DATE : 09/05/96 NYC Time : 1600 CUSIP : 072261
+PATH 1:
+Time, O, E-MISC, 0.7637824416160583, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ CALL : 11/1/05 @ 101 , dtp 11/1/07 NIC
+PATH 1:
+
+PATH 2:
+dtp, O, S-ORG, 0.7635557055473328, 1, 1
+
+
+*********************************************
+
+ Commerce said previously that spending at retail stores was up only 0.1 percent in July , partly because of softer sales of new cars and light trucks .
+PATH 1:
+Commerce, O, S-PER, 0.5993373394012451, 10, 5
+
+PATH 2:
+
+
+*********************************************
+
+ Department officials said July 's slight gain in incomes was the weakest for any month since January , when they were flat .
+PATH 1:
+incomes, O, S-LOC, 0.6462463140487671, 4, 2
+
+PATH 2:
+
+
+*********************************************
+
+ 2006 85,000
+PATH 1:
+2006, O, S-ORG, 0.4999803900718689, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ 2007 90,000
+PATH 1:
+2007, O, S-ORG, 0.41016218066215515, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ In the broader market , declining issues beat advances 1,627 to 743 on moderate volume of 321 million shares on the New York Stock Exchange .
+PATH 1:
+declining, O, B-ORG, 0.3871840834617615, 1, 1
+issues, O, E-ORG, 0.5163825750350952, 7, 1
+advances, O, B-ORG, 0.5173108577728271, 1, 1
+1,627, O, E-ORG, 0.42094576358795166, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ WORLD MARKETS ROUND-UP
+PATH 1:
+
+PATH 2:
+WORLD, O, B-MISC, 0.4874032735824585, 17, 2
+MARKETS, O, I-MISC, 0.4536502957344055, 1, 1
+ROUND-UP, O, E-MISC, 0.36410805583000183, 1, 1
+
+
+*********************************************
+
+ The move marks a further move by Pirelli 's cables division to expand in the fast-growing Far Eastern developing markets with the group already present in Indonesia , India and Malaysia .
+PATH 1:
+cables, O, S-MISC, 0.7805131673812866, 8, 2
+
+PATH 2:
+
+
+*********************************************
+
+ Italian tyre and cables giant Pirelli on Friday announced its long-awaited move into China with a cables joint venture set to capitalise on the rapidly-growing Chinese telecommunications market .
+PATH 1:
+cables, O, S-MISC, 0.6852619647979736, 8, 2
+
+PATH 2:
+
+
+*********************************************
+
+ The head of an international mediating mission defended its record on Friday in the face of criticism by pro-Moscow leaders in breakway Chechnya and insisted it was doing its best to bring peace to the region .
+PATH 1:
+pro-Moscow, O, S-MISC, 0.6680197715759277, 1, 1
+
+PATH 2:
+pro-Moscow, O, S-MISC, 0.5674023628234863, 1, 1
+
+
+*********************************************
+
+ The Dutch transport minister Annemarie Jorritsma told the country ' second chamber that there is no further need to investigate the 1992 crash of an El Al freighter which left 43 dead in an Amsterdam suburb .
+PATH 1:
+
+PATH 2:
+freighter, O, E-MISC, 0.5515812635421753, 1, 1
+
+
+*********************************************
+
+ Pro-Moscow leaders in Chechnya have criticised Tim Guldimann , the Swiss diplomat who heads the OSCE Chechnya mission , saying he was biased toward Zelimkhan Yandarbiyev , president of the self-declared separatist government .
+PATH 1:
+
+PATH 2:
+self-declared, O, S-MISC, 0.5556973218917847, 1, 1
+
+
+*********************************************
+
+ But one must not forget that the OSCE only has limited powers there , " said Cotti , who is also the Swiss foreign minister . "
+PATH 1:
+Cotti, O, S-PER, 0.9858313798904419, 4, 2
+
+PATH 2:
+Cotti, O, S-PER, 0.994373083114624, 4, 1
+
+
+*********************************************
+
+ Dutch say no reason to reopen El Al carqo enquiry .
+PATH 1:
+carqo, O, I-ORG, 0.36070960760116577, 1, 1
+enquiry, O, E-ORG, 0.37767159938812256, 2, 1
+
+PATH 2:
+carqo, O, E-MISC, 0.5760310888290405, 1, 1
+
+
+*********************************************
+
+ Sletten , a caretaker who has lived on the island for 30 years , said the Norwegian and Russian communities visit frequently , competing at soccer in the summer and with snow-scooter races in the winter .
+PATH 1:
+frequently, O, S-PER, 0.5293271541595459, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Azerbaijan has said it is prepared to grant autonomy to Nagorno-Karabakh if Armenian forces pull out , but will not accept Armenia 's demands for the independence of the enclave .
+PATH 1:
+
+PATH 2:
+Armenian, O, S-MISC, 0.9796283841133118, 2, 1
+
+
+*********************************************
+
+ Think of all that mixed together , with twisted , wrecked parts on the slope , " Onarheim , 29 , told Reuters .
+PATH 1:
+twisted, O, S-LOC, 0.36372441053390503, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Everything else is muddy , the waters of the fjord leaden .
+PATH 1:
+
+PATH 2:
+fjord, O, S-LOC, 0.439100056886673, 1, 1
+
+
+*********************************************
+
+ -- Stockholm newsroom +46-8-700 1017
+PATH 1:
+
+PATH 2:
+newsroom, O, E-ORG, 0.5535686612129211, 6, 2
+
+
+*********************************************
+
+ Around 2,000 of Indonesia 's controversial Timor national car made by Kia Motor Corp of South Korea arrived at Jakarta 's Tanjung Priok port on Thursday .
+PATH 1:
+
+PATH 2:
+Timor, O, B-ORG, 0.2970678508281708, 2, 1
+national, O, E-ORG, 0.4415445327758789, 12, 1
+
+
+*********************************************
+
+ Megawati has sued the defendants over a government-backed rebel congress which ousted her last June .
+PATH 1:
+congress, O, S-ORG, 0.9080284833908081, 2, 2
+
+PATH 2:
+government-backed, O, S-MISC, 0.64200359582901, 1, 1
+congress, O, S-ORG, 0.7753740549087524, 2, 2
+
+
+*********************************************
+
+ Jeans Mate Corp - 6mth parent forecast .
+PATH 1:
+6mth, O, S-ORG, 0.7964742183685303, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ " The members expressed their concern about the maintenance of the peace process and they urged that no action be taken that would have a negative impact on the negotiations , " Eitel said after an informal council session .
+PATH 1:
+informal, O, B-ORG, 0.8610408902168274, 1, 1
+council, O, E-ORG, 0.5311687588691711, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ A late goal by newly-signed defender Roberto Carlos saved the blushes of Real Madrid coach Fabio Capello and his multi-billion peseta line-up in the opening game of the Spanish championship on Saturday .
+PATH 1:
+newly-signed, O, S-ORG, 0.8527413606643677, 2, 2
+
+PATH 2:
+newly-signed, O, S-ORG, 0.30888694524765015, 2, 2
+
+
+*********************************************
+
+ Deportivo started strongly , taking the lead midway through the first half when former Auxerre playmaker Corentine Martins headed home a corner after a flick-on by Brazilian-born Spanish international midfielder Donato .
+PATH 1:
+headed, O, E-PER, 0.8954191207885742, 4, 1
+
+PATH 2:
+
+
+*********************************************
+
+ On Tuesday , Israeli crews hoisted a bulldozer over the walls of Jerusalem 's old city and demolished the centre , saying it was being restored without a building permit .
+PATH 1:
+old, O, B-LOC, 0.6999055743217468, 6, 1
+city, O, E-LOC, 0.982568621635437, 28, 2
+
+PATH 2:
+old, O, B-LOC, 0.6340541243553162, 6, 1
+city, O, E-LOC, 0.8553734421730042, 28, 4
+
+
+*********************************************
+
+ Israel , which captured and annexed East Jerusalem in 1967 , says it will never cede any part of the city .
+PATH 1:
+1967, O, S-LOC, 0.652791440486908, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ The Irish , under new manager Mick McCarthy , took a 4-0 lead within 20 minutes through captain Andy Townsend , 20-year-old Norwich striker Keith O'Neill , Sunderland forward Niall Quinn and teenager Ian Harte .
+PATH 1:
+20-year-old, O, B-PER, 0.8890615701675415, 4, 2
+
+PATH 2:
+
+
+*********************************************
+
+ GOLF - BRITISH MASTERS FINAL SCORES .
+PATH 1:
+GOLF, O, S-LOC, 0.6943573951721191, 5, 1
+
+PATH 2:
+
+
+*********************************************
+
+ 4. Marco Lietti ( Italy ) MG-Technogym 1:16
+PATH 1:
+1:16, O, E-MISC, 0.5460168719291687, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ 3. Ekimov 1:7
+PATH 1:
+1:7, O, E-PER, 0.9809624552726746, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Ata-ur-Rehman 6-0-40-1 , Saqlain Mushtaq 10-0-59-1 , Mushtaq Ahmed
+PATH 1:
+6-0-40-1, O, E-PER, 0.8844037055969238, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ pakistan
+PATH 1:
+pakistan, O, S-LOC, 0.9999982118606567, 1, 1
+
+PATH 2:
+pakistan, O, S-LOC, 0.9982380867004395, 1, 1
+
+
+*********************************************
+
+ Italy ( Adler Capelli , Cristiano Citto , Andrea Collinelli , Mauro Trentino ) 4:00.958 ( world record ) beat Russia ( Anton Chantyr , Edouard Gritsoun , Nikolai Kouznetsov ) 4:06.534 .
+PATH 1:
+4:00.958, O, S-PER, 0.486875057220459, 1, 1
+
+PATH 2:
+4:00.958, O, S-LOC, 0.6025382280349731, 1, 1
+4:06.534, O, S-LOC, 0.5872662663459778, 1, 1
+
+
+*********************************************
+
+ France ( Cyril Bos , Philippe Ermenault , Jean-Michel Monin , Francis Moreau ) 4:05.104 beat Germany ( Guido Fulst , Danilo Hondo , Thorsten Rund , Heiko Szonn ) 4:05.463
+PATH 1:
+4:05.104, O, S-ORG, 0.9013532400131226, 1, 1
+
+PATH 2:
+4:05.104, O, S-LOC, 0.9063205122947693, 1, 1
+4:05.463, O, S-LOC, 0.521017849445343, 1, 1
+
+
+*********************************************
+
+ Italy ( Adler Capelli , Cristiano Citto , Andrea Collinelli , Mauro Trentino ) 4:02.752 beat France ( Cyril Bos , Philippe Ermenault , Jean-Michel Monin , Francis Moreau ) 4:04.539
+PATH 1:
+4:02.752, O, S-ORG, 0.39857417345046997, 1, 1
+
+PATH 2:
+4:02.752, O, S-LOC, 0.8042280077934265, 1, 1
+4:04.539, O, S-LOC, 0.8605082631111145, 1, 1
+
+
+*********************************************
+
+ Marion Clignet ( France ) 3:30.974 ( World Record ) beat Jane
+PATH 1:
+
+PATH 2:
+3:30.974, O, S-ORG, 0.4897410571575165, 1, 1
+
+
+*********************************************
+
+ Antonella Bellutti ( Italy ) 3:32.174 caught and eliminated Rasa
+PATH 1:
+eliminated, O, S-LOC, 0.5899201035499573, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ BASEBALL - GONZALEZ HOMERS TWICE AS RANGERS BEAT INDIANS .
+PATH 1:
+
+PATH 2:
+HOMERS, O, E-PER, 0.5894772410392761, 1, 1
+
+
+*********************************************
+
+ In Seattle , Pete Incaviglia 's grand slam with one out in the sixth snapped a tie and lifted the Baltimore Orioles past the Seattle Mariners , 5-2 .
+PATH 1:
+grand, O, B-MISC, 0.7958084344863892, 4, 4
+slam, O, E-MISC, 0.9833642244338989, 2, 2
+
+PATH 2:
+grand, O, B-MISC, 0.6915533542633057, 4, 4
+slam, O, E-MISC, 0.7912021279335022, 2, 2
+
+
+*********************************************
+
+ Bob Wickman ( 6-1 ) pitched 2 2/3 hitless innings for the win , his second for the Brewers .
+PATH 1:
+pitched, O, S-ORG, 0.5634673833847046, 5, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Danny Tartabull added two hits and three RBI as all Chicago starters got at least one hit .
+PATH 1:
+
+PATH 2:
+starters, O, E-ORG, 0.4971996247768402, 1, 1
+
+
+*********************************************
+
+ It was Incaviglia 's sixth grand slam and 200th homer of his career .
+PATH 1:
+grand, O, B-MISC, 0.5903314352035522, 4, 4
+slam, O, E-MISC, 0.9891713261604309, 2, 2
+
+PATH 2:
+grand, O, B-MISC, 0.717210054397583, 4, 4
+slam, O, E-MISC, 0.8269698619842529, 2, 2
+
+
+*********************************************
+
+ Texas 's lead over Seattle in the West increased to six .
+PATH 1:
+increased, O, E-LOC, 0.6450642943382263, 4, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Essex and Kent both face tense finishes on Monday as they attempt to keep pace with title hopefuls Derbyshire and Surrey , convincing three-day victors on Saturday , in the English county championship run-in .
+PATH 1:
+county, O, I-MISC, 0.5148165225982666, 7, 3
+championship, O, E-MISC, 0.8447608351707458, 21, 3
+
+PATH 2:
+county, O, I-MISC, 0.7351470589637756, 7, 1
+championship, O, E-MISC, 0.8068475723266602, 21, 1
+
+
+*********************************************
+
+ Welsh rugby union matches on Saturday :
+PATH 1:
+rugby, O, I-ORG, 0.7213488817214966, 3, 1
+union, O, E-ORG, 0.523188591003418, 6, 2
+
+PATH 2:
+
+
+*********************************************
+
+ Melrose 107 Stirling County 10
+PATH 1:
+County, O, E-ORG, 0.5014383792877197, 6, 2
+
+PATH 2:
+County, O, E-ORG, 0.9310295581817627, 6, 2
+
+
+*********************************************
+
+ Former England captain Will Carling , handed the kicking duties , finished with 20 points .
+PATH 1:
+kicking, O, B-ORG, 0.5766856670379639, 1, 1
+duties, O, E-ORG, 0.5789589881896973, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ At Headingley ( Leeds ) : Yorkshire 290 and 329 ( R. Kettleborough 108 , G. Hamilton 61 ; P. Such 8-118 ) , Essex 372 and 100-5 .
+PATH 1:
+100-5, O, S-ORG, 0.4672766327857971, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Worcestershire 238 and 303 ( K. Spiring 130 not out , S. Rhodes 57 ; P. DeFreitas 4-70 ) , Derbyshire 471 and 71-1 .
+PATH 1:
+71-1, O, S-ORG, 0.7281758785247803, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ At Bristol : Gloucestershire 183 and 249 ( J. Russell 75 ) , Northamptonshire 190 and 218-9 .
+PATH 1:
+218-9, O, S-ORG, 0.3936026692390442, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Results and close scores of four-day English county championship matches on Saturday :
+PATH 1:
+county, O, B-MISC, 0.45950236916542053, 7, 3
+championship, O, E-MISC, 0.7372395396232605, 21, 3
+
+PATH 2:
+
+
+*********************************************
+
+ Canada - Aunger ( 41st min , pen ) , Paul Peschisolido ( 42nd ) , Carlo Corrazin ( 87th )
+PATH 1:
+
+PATH 2:
+pen, O, S-PER, 0.4362420439720154, 2, 2
+
+
+*********************************************
+
+ 1. Alex Zanardi ( Italy ) , Reynard Honda , 53.980 ( 113.576
+PATH 1:
+53.980, O, S-PER, 0.4489310085773468, 1, 1
+
+PATH 2:
+53.980, O, S-PER, 0.24840740859508514, 1, 1
+
+
+*********************************************
+
+ 7. Al Unser Jr ( U.S. ) , Penske Mercedes-Benz , 54.683
+PATH 1:
+Jr, O, E-PER, 0.9970747232437134, 1, 1
+
+PATH 2:
+Jr, O, E-PER, 0.9859579205513, 1, 1
+
+
+*********************************************
+
+ Honiball converted and Joubert kicked a penalty before All Black hooker Sean Fitzpatrick scored a try from close range on the stroke of half-time to narrow the lead to 16-8 and hint at a comeback .
+PATH 1:
+converted, O, E-PER, 0.7998916506767273, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ SOCCER - MAURITANIA DISSOLVES NATIONAL TEAM AFTER CUP EXIT .
+PATH 1:
+NATIONAL, O, B-MISC, 0.5014761686325073, 3, 1
+TEAM, O, I-MISC, 0.45400065183639526, 2, 1
+AFTER, O, I-MISC, 0.991636335849762, 6, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Zemun 1 Rad ( B ) 0
+PATH 1:
+
+PATH 2:
+(, O, I-ORG, 0.8581972122192383, 679, 6
+B, O, I-ORG, 0.9580227136611938, 5, 1
+), O, E-ORG, 0.5897809863090515, 680, 4
+
+
+*********************************************
+
+ I shook him a bit but he will come out next time and be a better player for it -- that 's Jansher . "
+PATH 1:
+
+PATH 2:
+Jansher, O, S-PER, 0.4776582419872284, 12, 1
+
+
+*********************************************
+
+ Seles easily won both her singles matches and King is counting on the co-world number one to lead the team again .
+PATH 1:
+easily, O, E-PER, 0.8428647518157959, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ What we like would be Seles , ( Olympic champion Lindsay ) Davenport and Mary Joe Fernandez . "
+PATH 1:
+
+PATH 2:
+), O, I-PER, 0.7568820714950562, 680, 4
+
+
+*********************************************
+
+ TENNIS - SPAIN , U.S. TEAMS OPEN ON ROAD FOR 1997 FED CUP .
+PATH 1:
+TEAMS, O, I-MISC, 0.9474396705627441, 1, 1
+OPEN, O, E-MISC, 0.9724092483520508, 7, 1
+
+PATH 2:
+TEAMS, O, I-MISC, 0.8188300132751465, 1, 1
+OPEN, O, E-MISC, 0.9412918090820312, 7, 1
+
+
+*********************************************
+
+ U.S. - Joe-Max Moore ( 3rd minute , 88th on penalty kick ) , Eric Wynalda ( 61st )
+PATH 1:
+88th, O, S-PER, 0.8091425895690918, 3, 2
+61st, O, S-LOC, 0.5690962076187134, 5, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Major league ERA leader Kevin Brown threw an eight-hitter and Devon White 's RBI double snapped a fifth-inning tie as the Florida Marlins beat the Cincinnati Reds 3-1 for their seventh straight win Friday .
+PATH 1:
+Major, O, B-MISC, 0.9847419261932373, 7, 1
+league, O, I-MISC, 0.8317277431488037, 15, 1
+
+PATH 2:
+Major, O, B-MISC, 0.8995846509933472, 7, 1
+league, O, E-MISC, 0.7875775098800659, 15, 1
+
+
+*********************************************
+
+ " He has a devastating sinker , " observed Reds manager Ray Knight . "
+PATH 1:
+observed, O, B-ORG, 0.8344299793243408, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Benard , hitting .467 ( 14-for-30 ) against the Mets this season , hit his first pitch from Pete Harnisch ( 8-10 ) in the seventh over the right-field fence to put the Giants up 4-2 .
+PATH 1:
+hitting, O, B-PER, 0.5572081804275513, 3, 1
+.467, O, E-PER, 0.9014512896537781, 2, 1
+8-10, O, S-ORG, 0.4890933334827423, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ The 30-year-old Edberg , a former two-time Open champion , had wrestled control of the match away from Karbacher when the German , hampered by a left hamstring injury , decided he could n't continue under the stadium lights at the National Tennis Centre .
+PATH 1:
+two-time, O, B-MISC, 0.915284276008606, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ BOXING - PRINCE NASEEM RETAINS WBO FEATHERWEIGHT TITLE .
+PATH 1:
+PRINCE, O, B-PER, 0.48275357484817505, 1, 1
+
+PATH 2:
+PRINCE, O, B-PER, 0.6515573859214783, 1, 1
+
+
+*********************************************
+
+ The victory extended to 29 matches France 's unbeaten run under coach Aime Jacquet , their Euro 96 semifinal elimination having come in a penalty shoot-out , but was marred by the sending-off of Chelsea central defender Franck Leboeuf .
+PATH 1:
+
+PATH 2:
+central, O, E-ORG, 0.5040231943130493, 7, 1
+
+
+*********************************************
+
+ Austria 's best chance came in the 63rd minute with Stephan Marasek of SC Freiburg taking advantage of a scramble in the Scottish penalty area but his shot narrowly passing the left-hand post .
+PATH 1:
+left-hand, O, B-ORG, 0.5292597413063049, 1, 1
+post, O, E-ORG, 0.5807444453239441, 3, 1
+
+PATH 2:
+
+
+*********************************************
+
+ The Scots are not really a great team and we should have won , " he said .
+PATH 1:
+
+PATH 2:
+Scots, O, S-MISC, 0.7125994563102722, 2, 2
+
+
+*********************************************
+
+ Belgium - 1 - Filip De Wilde , 2 - Bertrand Crasson , 3 - Dirk Medved , 4 - Pascal Renier , 16 - Geoffrey Claeys , 6 - Gunther Schepens ( 15 - Nico Van Kerckhoven , 81st ) , 10 - Enzo Scifo , 7 - Gert Verheyen ( 14 - Frederic Peiremans , 62nd ) , 9 - Marc Degryse , 8 - Luc Nilis , 11- Luis Oliveira ( 18 - Gilles De Bilde , 88th ) .
+PATH 1:
+81st, O, S-ORG, 0.8881264925003052, 2, 1
+88th, O, S-ORG, 0.6724987626075745, 3, 2
+
+PATH 2:
+
+
+*********************************************
+
+ Turkey - 1 - Rustu Recber , 4 - Hakan Unsal ( 14 - Sergen Yalcin , 57th ) , 2 - Recep Cetin , 3 - Ogun Temizkanoglu , 5 - Alpay Ozalan , 7- Abdullah Ercan , 6 - Tolunay Kafkas , 10 - Oguz Cetin ( 13 - Arif Erdem , 57th ) , 11 - Tayfun Korkut , 9 - Hakan Sukur , 8 - Saffet Sancakli ( 17- Orhan Cikirikci , 76th ) .
+PATH 1:
+7-, O, B-PER, 0.6319947838783264, 1, 1
+17-, O, B-PER, 0.317349374294281, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ The police were given an unexpected hand by second-half substitute Sergen Yalcin who rekindled Turkish hopes in the 61st with a splendid half-volley which stunned Belgian goalkeeper Filip De Wilde .
+PATH 1:
+second-half, O, B-PER, 0.5314216017723083, 2, 1
+substitute, O, E-PER, 0.46804970502853394, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Belgium 's best second-half effort came three minutes later when Degryse put the ball over the bar from close range with Recber beaten .
+PATH 1:
+best, O, S-ORG, 0.7236656546592712, 21, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Miller , who went into the contest with a record of 24 knock-out wins in 32 fights , took charge from the opening bell and had his opponent on the canvas inside 90 seconds when he landed a deft left-hook to the head .
+PATH 1:
+
+PATH 2:
+bell, O, S-PER, 0.34478843212127686, 1, 1
+
+
+*********************************************
+
+ A powerful right hook followed by a straight left gave defending champion Nate Miller a seventh round knock-out win over fellow American James Heath in their WBA cruiserweight title bout on Saturday .
+PATH 1:
+knock-out, O, S-ORG, 0.45866286754608154, 2, 1
+
+PATH 2:
+
+
+*********************************************
+
+ BOXING - KNOCK-OUT SPECIALIST MILLER DEFENDS TITLE .
+PATH 1:
+KNOCK-OUT, O, S-ORG, 0.48712268471717834, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ " For myself , personally , I 've planned things so that that will be the end of me , " the 32-year-old national team captain was quoted as saying by the daily Sueddeutsche Zeitung on Saturday .
+PATH 1:
+national, O, B-ORG, 0.583605945110321, 12, 1
+team, O, E-ORG, 0.47845664620399475, 29, 1
+daily, O, B-ORG, 0.6749634742736816, 3, 1
+
+PATH 2:
+
+
+*********************************************
+
+ ( 90th , pen )
+PATH 1:
+
+PATH 2:
+pen, O, S-PER, 0.345630019903183, 2, 2
+
+
+*********************************************
+
+ 1706 - French troops under Duke of Orleans besieging Turin were defeated by the Austrians under Prince Eugene , the French army was destroyed and they ceased trying to capture northern Italy .
+PATH 1:
+
+PATH 2:
+Prince, O, B-PER, 0.8876945376396179, 2, 1
+
+
+*********************************************
+
+ Best known for appearances in " Ice Cold in Alex " , " Lawrence of Arabia " and , as Cardinal Wolsey , in " Anne of a Thousand Days " .
+PATH 1:
+
+PATH 2:
+Cardinal, O, B-PER, 0.32112693786621094, 3, 2
+
+
+*********************************************
+
+ 1714 - The Treaty of Baden was signed between the Holy Roman Emperor Charles VI and France , ending War of Spanish Succession .
+PATH 1:
+
+PATH 2:
+Holy, O, B-MISC, 0.3352925479412079, 2, 2
+
+
+*********************************************
+
+ He also got the House of Lords to pass his Trades Disputes Act which gave labour unions more freedom to strike .
+PATH 1:
+labour, O, S-ORG, 0.6642041206359863, 8, 6
+
+PATH 2:
+
+
+*********************************************
+
+ British actor of stage and screen in films from 1948 .
+PATH 1:
+stage, O, S-LOC, 0.46438881754875183, 3, 1
+
+PATH 2:
+
+
+*********************************************
+
+ 1994 - The Stars and Stripes flag was lowered for the last time over U.S. army headquarters in Berlin , formally ending the American presence in the once-divided city after nearly half a century .
+PATH 1:
+
+PATH 2:
+once-divided, O, B-LOC, 0.36674419045448303, 1, 1
+city, O, E-LOC, 0.622772753238678, 28, 4
+
+
+*********************************************
+
+ Police launched a nationwide search on Thursday after he disappeared during an unsupervised trip to the toilet while visiting a popular zoo and theme park south of London .
+PATH 1:
+
+PATH 2:
+park, O, B-LOC, 0.34604716300964355, 1, 1
+south, O, I-LOC, 0.8850391507148743, 8, 4
+of, O, I-LOC, 0.8521237373352051, 892, 16
+
+
+*********************************************
+
+ A convicted British paedophile was arrested on Saturday , two days after escaping from custody during a supervised day trip to a zoo , police said .
+PATH 1:
+
+PATH 2:
+zoo, O, S-LOC, 0.4141286015510559, 3, 1
+
+
+*********************************************
+
+ The report , monitored by the British Broadcasting Corporation ( BBC ) , quoted security services as saying six other people were injured in the blast in the town of Staouelli .
+PATH 1:
+security, O, B-PER, 0.746558666229248, 9, 1
+services, O, E-PER, 0.5337321758270264, 4, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Seven Iraqi men appeared in court on Saturday charged with air piracy following the hijacking to Britain of a Sudanese airliner with 199 people aboard .
+PATH 1:
+air, O, B-ORG, 0.539101779460907, 20, 1
+piracy, O, E-ORG, 0.3867873251438141, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Viljoen broke with other right-wing whites in 1994 by taking part in the country 's first all-race elections in April of that year , saying the only way to attain self-determination was by cooperating with President Nelson Mandela 's majority African National Congress .
+PATH 1:
+majority, O, B-MISC, 0.7720127105712891, 3, 1
+
+PATH 2:
+
+
+*********************************************
+
+ According to state television , Viljoen told the news conference the self-rule model should be introduced in parts of the Northern Cape provinces where a majority of people -- whites and mixed-race Coloureds -- speak Afrikaans .
+PATH 1:
+provinces, O, E-LOC, 0.8403840661048889, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Constand Viljoen , leader of the Freedom Front party , told a news conference in Pretoria self-determination for Afrikaners could begin at local government level .
+PATH 1:
+
+PATH 2:
+party, O, E-ORG, 0.7278879284858704, 10, 1
+
+
+*********************************************
+
+ U.N. officials said more than 1,000 aid workers will take part in the census from Sunday until Tuesday of the estimated 727,000 refugees in camps around the eastern Zairean border town of Goma .
+PATH 1:
+727,000, O, S-MISC, 0.6415550112724304, 1, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Crowds of pro-independence Chechens greeted a newly-signed peace deal by singing , dancing and firing guns in the air on Saturday , but the celebrations held a trace of uncertainty .
+PATH 1:
+newly-signed, O, S-MISC, 0.7487677931785583, 2, 2
+
+PATH 2:
+newly-signed, O, S-MISC, 0.7627080082893372, 2, 2
+
+
+*********************************************
+
+ Moslems were driven from the village during the 43- month Bosnian war and most of their houses were destroyed .
+PATH 1:
+war, O, E-MISC, 0.5953165888786316, 26, 1
+
+PATH 2:
+
+
+*********************************************
+
+ The consortium wanted 40 percent of Ruch 's shares , the state would get 20 percent of Ruch and 40 percent would be offered on the Warsaw stock exchange .
+PATH 1:
+stock, O, I-ORG, 0.760914146900177, 15, 2
+exchange, O, E-ORG, 0.9415695667266846, 2, 2
+
+PATH 2:
+stock, O, I-ORG, 0.5556201338768005, 15, 3
+exchange, O, E-ORG, 0.8827559947967529, 2, 2
+
+
+*********************************************
+
+ Zycie Warszawy said the new , open consortium , which also included several listed Polish firms , would on Monday inform Privatisation Minister Wieslaw Kaczmarek of its plans .
+PATH 1:
+new, O, B-MISC, 0.9509503841400146, 31, 1
+,, O, I-MISC, 0.9926546812057495, 1949, 2
+open, O, E-MISC, 0.6258130073547363, 3, 2
+
+PATH 2:
+
+
+*********************************************
+
+ Two columns of rebels appeared in jeeps and cars , firing their guns in the air , as the crowd rushed towards them .
+PATH 1:
+cars, O, S-LOC, 0.7273167371749878, 8, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Polish group to bid for Ruch newsstand chain - paper .
+PATH 1:
+
+PATH 2:
+newsstand, O, E-ORG, 0.5466358661651611, 1, 1
+
+
+*********************************************
+
+ The book , which has been translated into 40 languages , deals with a day in the life of Santiago de Cuba , Puig 's native city , under the pre-Castro government of Fulgencio Batista .
+PATH 1:
+native, O, B-LOC, 0.8490949273109436, 1, 1
+city, O, E-LOC, 0.700607419013977, 28, 2
+
+PATH 2:
+native, O, B-LOC, 0.848378598690033, 1, 1
+city, O, E-LOC, 0.6364213824272156, 28, 4
+
+
+*********************************************
+
+ Xiao Qiang , executive director of the New York-based group Human Rights in China , said Wang 's arrest on Friday appeared to be part of the national " Strike Hard " campaign that has imprisoned thousands and sent hundreds to their death .
+PATH 1:
+
+PATH 2:
+group, O, I-ORG, 0.6597673296928406, 60, 1
+
+
+*********************************************
+
+ The detention of veteran dissident Wang Donghai showed China 's determination to crush any vestige of dissent during the current profound transitions in the nation 's leadership , a human rights activist said on Saturday .
+PATH 1:
+dissident, O, B-PER, 0.4509817957878113, 8, 2
+
+PATH 2:
+
+
+*********************************************
+
+ Wang was arrested in the east China city of Hangzhou by security officers who told the dissident 's family he would be sent to a study class -- a euphemism for coercive ideological reform .
+PATH 1:
+dissident, O, S-ORG, 0.5491030216217041, 8, 2
+
+PATH 2:
+
+
+*********************************************
+
+ Wang , 45 , was sentenced last month to one year 's " re-education by labour " but was released because of ill-health .
+PATH 1:
+labour, O, S-ORG, 0.5677351951599121, 8, 6
+
+PATH 2:
+
+
+*********************************************
+
+ The NLD party won a landslide victory in a 1990 election but the State Law and Order Restoration Council ( SLORC ) , which assumed power in 1988 after crushing pro-democracy demonstrations , never recognised the poll .
+PATH 1:
+party, O, E-ORG, 0.6459651589393616, 10, 1
+
+PATH 2:
+
+
+*********************************************
+
+ In May the government launched a sweeping crackdown on the democracy movement , detaining over 260 members of Suu Kyi 's National League for Democracy ( NLD ) ahead of a party congress .
+PATH 1:
+congress, O, S-ORG, 0.7557007074356079, 2, 2
+
+PATH 2:
+congress, O, S-ORG, 0.4712744951248169, 2, 2
+
+
+*********************************************
+
+ The domestic Yonhap news agency said the South Korean government would consider the northern demand only if the North accepted Seoul 's requests , which include regular reunions of families split by the Korean War .
+PATH 1:
+War, O, E-MISC, 0.7261558175086975, 6, 4
+
+PATH 2:
+
+
+*********************************************
+
+ Multinational firms including Mobil , Shell and Caltex , were also attracted to Tianjin due to China 's rising demand for lube and oil-based products , the newspaper said .
+PATH 1:
+
+PATH 2:
+lube, O, S-ORG, 0.4195408523082733, 1, 1
+
+
+*********************************************
+
+ Kim , an unrepentant communist , was captured during the Korean War and released after spending more than 30 years in a southern jail .
+PATH 1:
+War, O, E-MISC, 0.6579700112342834, 6, 4
+
+PATH 2:
+
+
+*********************************************
+
+ Last month , Wang , 45 , a veteran dissident of the 1979 Democracy Wall movement , was ordered to serve one year of " re-education through labour " , but released because of poor health .
+PATH 1:
+1979, O, B-ORG, 0.5091489553451538, 2, 2
+movement, O, E-ORG, 0.9311602115631104, 8, 2
+labour, O, S-ORG, 0.4444957375526428, 8, 6
+
+PATH 2:
+1979, O, B-ORG, 0.9320862889289856, 2, 2
+movement, O, E-ORG, 0.5551794171333313, 8, 2
+
+
+*********************************************
+
+ Re-education through labour is an administrative punishment with a maximum of three years that can be imposed by police without recourse to prosecutors or the courts .
+PATH 1:
+labour, O, S-ORG, 0.9013030529022217, 8, 6
+
+PATH 2:
+
+
+*********************************************
+
+ Representatives of the five nations making up the committee -- Israel , Lebanon , Syria , France and the United States -- will meet at 11 a.m. ( 0800 GMT ) in Naqoura , the coastal headquarters of the U.N. Interim Force in Lebanon ( UNIFIL ) .
+PATH 1:
+five, O, B-MISC, 0.879047691822052, 27, 1
+nations, O, E-MISC, 0.9467542171478271, 3, 1
+
+PATH 2:
+five, O, B-MISC, 0.5115559101104736, 27, 1
+nations, O, E-MISC, 0.47036975622177124, 3, 1
+
+
+*********************************************
+
+ A committee monitoring the ceasefire agreement between Israel and Hizbollah guerrillas will meet in south Lebanon on Sunday to discuss an Israeli complaint against the Islamic group , the Israeli army said .
+PATH 1:
+south, O, B-LOC, 0.7350672483444214, 8, 3
+
+PATH 2:
+
+
+*********************************************
+
+ Ceasefire monitors to meet in south Lebanon .
+PATH 1:
+south, O, B-LOC, 0.6088372468948364, 8, 3
+
+PATH 2:
+south, O, B-LOC, 0.7513408660888672, 8, 4
+
+
+*********************************************
+
+ U.N. relief officials said they were not aware that the tanks advancing on Arbil were manned by Iraqi troops as they advanced from KDP-controlled areas and raised KDP flags .
+PATH 1:
+KDP-controlled, O, B-ORG, 0.5152229070663452, 1, 1
+areas, O, E-ORG, 0.46050429344177246, 4, 1
+
+PATH 2:
+
+
+*********************************************
+
+ The first portion of the campaign involves pickup trucks equipped with billboards that were driving along some of the nation 's busiest interstate highways during the Labor Day weekend , including Interstate 95 on the East Coast , Interstates 80 and 90 in the Midwest and Interstate 5 in California .
+PATH 1:
+
+PATH 2:
+and, O, I-ORG, 0.8918660283088684, 747, 6
+
+
+*********************************************
+
+ Automakers , suppliers , insurers and the federal government 's auto safety agency Saturday launched a $ 10 million safety awareness campaign aimed at reducing the number of children killed accidentally by air bags in cars and trucks .
+PATH 1:
+Automakers, O, S-PER, 0.3374558985233307, 3, 2
+
+PATH 2:
+
+
+*********************************************
+
+ Janet Dewey , executive director of the industry-funded National Automobile Occupant Protection Campaign , said most of the injuries to children occurred because they were not wearing seatbelts .
+PATH 1:
+
+PATH 2:
+industry-funded, O, B-ORG, 0.390198677778244, 1, 1
+
+
+*********************************************
+
+ Fire department officials said they were investigating the cause of the blast and searching for any more casualties .
+PATH 1:
+Fire, O, B-ORG, 0.9642206430435181, 3, 1
+department, O, E-ORG, 0.4943658411502838, 5, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Automakers , U.S. agency plan air bag safety ads .
+PATH 1:
+Automakers, O, S-LOC, 0.7942351698875427, 3, 2
+
+PATH 2:
+
+
+*********************************************
+
+ In addition to the 158 F / A-18 , F-14 and other fighter planes on the aircraft carriers Vinson and Enterprise , the Air Force air expeditionary force of 30 to 40 F-15 and F-16 fighter planes and fuel tankers is ready to fly from three U.S. bases in the United States , they said .
+PATH 1:
+
+PATH 2:
+and, O, I-ORG, 0.8813416361808777, 747, 6
+air, O, I-ORG, 0.4880245327949524, 20, 1
+expeditionary, O, E-ORG, 0.4046502411365509, 3, 1
+
+
+*********************************************
+
+ An illegal drag race on a Dallas street turned deadly when another vehicle veered into the crowd , killing two people and injuring a dozen more , police said Saturday .
+PATH 1:
+street, O, E-LOC, 0.6468638181686401, 4, 1
+
+PATH 2:
+street, O, E-LOC, 0.5769866704940796, 4, 1
+
+
+*********************************************
+
+ The Iranian ambassador was also summoned to the ministry in Bonn to hear a sharp protest and " disapproval of this glaring breach of the principles of international law " , he added .
+PATH 1:
+international, O, B-MISC, 0.8335169553756714, 29, 1
+law, O, E-MISC, 0.6616901755332947, 14, 1
+
+PATH 2:
+
+
+*********************************************
+
+ Nato declines comment on fighting in Iraq .
+PATH 1:
+Nato, O, S-ORG, 0.9999798536300659, 1, 1
+
+PATH 2:
+Nato, O, S-ORG, 0.9983170032501221, 1, 1
+
+
+*********************************************
+
+ " In the life of one person you can tell the events that formed the north and south of Ireland as they are today . "
+PATH 1:
+
+PATH 2:
+south, O, B-LOC, 0.5441064834594727, 8, 4
+of, O, I-LOC, 0.5799737572669983, 892, 16
+
+
+*********************************************
+
+ VENICE , Italy 1996-08-31
+PATH 1:
+VENICE, O, S-LOC, 0.9461233615875244, 1, 1
+
+PATH 2:
+VENICE, O, S-LOC, 0.9890910983085632, 1, 1
+
+
+*********************************************
+
+path_1_count = 224
+path_2_count = 159
