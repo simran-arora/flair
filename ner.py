@@ -1,4 +1,4 @@
-from flair.data import Corpus
+from flair.data import Corpus, MultiCorpus
 from flair.data_fetcher import  NLPTaskDataFetcher, NLPTask
 from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings
 from typing import List
@@ -9,13 +9,52 @@ import argparse
 from pathlib import Path
 from flair.training_utils import EvaluationMetric
 import gensim
-import tempfile
+import time
+import os
 
-def train_ner(embed_path, resultdir, datadir, lr, use_crf=False, finetune=True):
+def save_random_train_set(corpus, path):
+    stamp = time.time()
+
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    dev_name = str(path) + str(stamp)+"_dev"
+    test_name = str(path) + str(stamp)+"_test"
+    train_name = str(path) + str(stamp)+"_train"
+    
+    with open(dev_name, 'w') as dev_f:
+        for sent in corpus.dev:
+            dev_f.write(str(sent.to_plain_string()) + "\n\n")
+    dev_f.close()
+    
+    with open(test_name, 'w') as test_f:
+        for sent in corpus.test:
+            test_f.write(str(sent.to_plain_string()) + "\n\n")
+    test_f.close()
+    
+    with open(train_name, 'w') as train_f:
+        for sent in corpus.train:
+            train_f.write(str(sent.to_plain_string()) + "\n\n")
+    train_f.close()
+    
+
+def train_ner(embed_path, resultdir, datadir, lr, use_crf=False, finetune=True, proportion=0.1, hidden_units=256):
+    
     # 1. get the corpus
-    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
-    print(corpus)
+    multiple = int(1/proportion)
+    one_copy: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
+    one_copy = one_copy.downsample(proportion)
+    one_stats = one_copy.obtain_statistics()
+    print(one_stats)
 
+    # save for future analysis
+    #save_random_train_set(one_copy, datadir + "/conll_03/proportion_" + str(proportion) + "/")
+    
+    corpus: MultiCorpus = MultiCorpus([one_copy]*multiple)
+    stats = corpus.obtain_statistics()
+    print(stats)
+    print(corpus)
+    
     # 2. what tag do we want to predict?
     tag_type = 'ner'
 
@@ -31,7 +70,7 @@ def train_ner(embed_path, resultdir, datadir, lr, use_crf=False, finetune=True):
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
 
     # 5. initialize sequence tagger
-    from flair.models import SeqaauenceTagger
+    from flair.models import SequenceTagger
 
     tagger: SequenceTagger = SequenceTagger(hidden_size=256,
                                             embeddings=embeddings,
@@ -49,12 +88,16 @@ def train_ner(embed_path, resultdir, datadir, lr, use_crf=False, finetune=True):
     trainer.train(resultdir,
                 learning_rate=lr,
                 mini_batch_size=32,
-                max_epochs=150,
+                max_epochs=1,
                 monitor_test=True)
 
-def eval_ner(embed_path, resultdir, datadir, use_crf=False):
+    return corpus
+
+
+def eval_ner(embed_path, resultdir, datadir, corpus: Corpus, use_crf=False):
+    return
     # 1. get the corpus
-    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
+    #corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
 
     # 2. what tag do we want to predict?
