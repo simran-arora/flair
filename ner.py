@@ -128,12 +128,12 @@ def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False):
     from flair.trainers import ModelTrainer
 
     trainer = ModelTrainer.load_from_checkpoint(checkpoint, corpus)
-    dev_micro_f1_score, test_micro_f1_score, dev_PER, dev_ORG, dev_LOC, dev_MISC = trainer.final_test(Path(resultdir),
+    dev_micro_f1_score, test_micro_f1_score, dev_detailed_results_dict = trainer.final_test(Path(resultdir),
         embeddings_in_memory=True,
         evaluation_metric=EvaluationMetric.MICRO_F1_SCORE,
         eval_mini_batch_size=32)
 
-    return dev_micro_f1_score, test_micro_f1_score, dev_PER, dev_ORG, dev_LOC, dev_MISC
+    return dev_micro_f1_score, test_micro_f1_score, dev_detailed_results_dict
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="")
