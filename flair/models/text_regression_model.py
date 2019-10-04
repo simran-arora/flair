@@ -153,12 +153,16 @@ class TextRegressor(flair.models.TextClassifier):
                 f"pearson: {metric.pearsonr():.4f} - "
                 f"spearman: {metric.spearmanr():.4f}"
             )
-
+            detailed_dict['AVG'] = metric.mean_squared_error()
+            detailed_dict['mae'] = metric.mean_absolute_error()
+            detailed_dict['pearson'] = metric.pearsonr()
+            detailed_dict['spearman'] = metric.spearmanr()
+            
             result: Result = Result(
                 metric.pearsonr(), log_header, log_line, detailed_result
             )
 
-            return result, eval_loss
+            return result, eval_loss, detailed_dict
 
     def _get_state_dict(self):
         model_state = {
