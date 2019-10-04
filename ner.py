@@ -8,10 +8,8 @@ import torch
 import argparse
 from pathlib import Path
 from flair.training_utils import EvaluationMetric
-import gensim
-import tempfile
 
-def train_ner(embed_path, resultdir, datadir, lr, use_crf=False, finetune=True):
+def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=False, finetune=True):
     # 1. get the corpus
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
@@ -25,13 +23,14 @@ def train_ner(embed_path, resultdir, datadir, lr, use_crf=False, finetune=True):
 
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
-       	WordEmbeddings(embed_path)
+       	
+        WordEmbeddings(embed_path)
     ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
 
     # 5. initialize sequence tagger
-    from flair.models import SeqaauenceTagger
+    from flair.models import SequenceTagger
 
     tagger: SequenceTagger = SequenceTagger(hidden_size=256,
                                             embeddings=embeddings,
@@ -52,7 +51,7 @@ def train_ner(embed_path, resultdir, datadir, lr, use_crf=False, finetune=True):
                 max_epochs=150,
                 monitor_test=True)
 
-def eval_ner(embed_path, resultdir, datadir, use_crf=False):
+def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False):
     # 1. get the corpus
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
@@ -66,7 +65,8 @@ def eval_ner(embed_path, resultdir, datadir, use_crf=False):
 
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
-	WordEmbeddings(embed_path)
+        
+        WordEmbeddings(embed_path)
     ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
