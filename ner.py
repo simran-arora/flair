@@ -8,7 +8,6 @@ import torch
 import argparse
 from pathlib import Path
 from flair.training_utils import EvaluationMetric
-import gensim
 import time
 import os
 
@@ -38,8 +37,7 @@ def save_random_train_set(corpus, path):
     train_f.close()
     
 
-def train_ner(embed_path, resultdir, datadir, lr, use_crf=False, finetune=True, proportion=0.1, hidden_units=256):
-    
+def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=False, finetune=True, proportion=1.0, hidden_units=256):
     # 1. get the corpus
     multiple = int(1/proportion)
     one_copy: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
@@ -64,7 +62,8 @@ def train_ner(embed_path, resultdir, datadir, lr, use_crf=False, finetune=True, 
 
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
-       	WordEmbeddings(embed_path)
+       	
+        WordEmbeddings(embed_path)
     ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
@@ -91,11 +90,8 @@ def train_ner(embed_path, resultdir, datadir, lr, use_crf=False, finetune=True, 
                 max_epochs=1,
                 monitor_test=True)
 
-    return corpus
 
-
-def eval_ner(embed_path, resultdir, datadir, corpus: Corpus, use_crf=False):
-    return
+def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False):
     # 1. get the corpus
     #corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
@@ -109,7 +105,8 @@ def eval_ner(embed_path, resultdir, datadir, corpus: Corpus, use_crf=False):
 
     # 4. initialize embeddings
     embedding_types: List[TokenEmbeddings] = [
-	WordEmbeddings(embed_path)
+        
+        WordEmbeddings(embed_path)
     ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
