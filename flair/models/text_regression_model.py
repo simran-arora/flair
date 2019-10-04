@@ -147,22 +147,23 @@ class TextRegressor(flair.models.TextClassifier):
             log_line = f"{metric.mean_squared_error()}\t{metric.spearmanr()}\t{metric.pearsonr()}"
             log_header = "MSE\tSPEARMAN\tPEARSON"
 
+            detailed_results_dict = {}
             detailed_result = (
                 f"AVG: mse: {metric.mean_squared_error():.4f} - "
                 f"mae: {metric.mean_absolute_error():.4f} - "
                 f"pearson: {metric.pearsonr():.4f} - "
                 f"spearman: {metric.spearmanr():.4f}"
             )
-            detailed_dict['AVG'] = metric.mean_squared_error()
-            detailed_dict['mae'] = metric.mean_absolute_error()
-            detailed_dict['pearson'] = metric.pearsonr()
-            detailed_dict['spearman'] = metric.spearmanr()
+            detailed_results_dict['mse'] = metric.mean_squared_error()
+            detailed_results_dict['mae'] = metric.mean_absolute_error()
+            detailed_results_dict['pearson'] = metric.pearsonr()
+            detailed_results_dict['spearman'] = metric.spearmanr()
             
             result: Result = Result(
                 metric.pearsonr(), log_header, log_line, detailed_result
             )
 
-            return result, eval_loss, detailed_dict
+            return result, eval_loss, detailed_results_dict
 
     def _get_state_dict(self):
         model_state = {

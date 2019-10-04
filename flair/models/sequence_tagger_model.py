@@ -298,7 +298,7 @@ class SequenceTagger(flair.nn.Model):
                 f"\nMACRO_AVG: acc {metric.macro_avg_accuracy()} - f1-score {metric.macro_avg_f_score()}"
             )
             
-            subclass_scores = {}
+            detailed_results_dict = {}
             for class_name in metric.get_classes():
                 detailed_result += (
                     f"\n{class_name:<10} tp: {metric.get_tp(class_name)} - fp: {metric.get_fp(class_name)} - "
@@ -307,7 +307,8 @@ class SequenceTagger(flair.nn.Model):
                     f"accuracy: {metric.accuracy(class_name):.4f} - f1-score: "
                     f"{metric.f_score(class_name):.4f}"
                 )
-                subclass_scores[class_name] = metric.f_score(class_name)
+                detailed_result_key = class_name + "_F1"
+                detailed_results_dict[detailed_result_key] = metric.f_score(class_name)
 
             result = Result(
                 main_score=metric.micro_avg_f_score(),
@@ -316,7 +317,7 @@ class SequenceTagger(flair.nn.Model):
                 detailed_results=detailed_result,
             )
 
-            return result, eval_loss, subclass_scores
+            return result, eval_loss, detailed_results_dict
 
     def forward_loss(
         self, sentences: Union[List[Sentence], Sentence], sort=True
