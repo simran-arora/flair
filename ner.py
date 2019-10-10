@@ -40,17 +40,19 @@ def save_random_train_set(corpus, path):
 def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=False, finetune=True, proportion=1.0, hidden_units=256):
     # 1. get the corpus
     multiple = int(1/proportion)
-    one_copy: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
-    one_copy = one_copy.downsample(proportion)
-    one_stats = one_copy.obtain_statistics()
-    print(one_stats)
+    print("PROPORTION IS: " + str(proportion))
+    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir, multiple=multiple)
+    # downsamples and then multiplies by a multiple to get the same set size (want to keep the trianing time constant)
+    # corpus = corpus.downsample_multiple(proportion, multiple)
+    #one_stats = corpus.obtain_statistics()
+    #print(one_stats)
 
     # save for future analysis
     #save_random_train_set(one_copy, datadir + "/conll_03/proportion_" + str(proportion) + "/")
     
-    corpus: MultiCorpus = MultiCorpus([one_copy]*multiple)
-    stats = corpus.obtain_statistics()
-    print(stats)
+    #corpus: MultiCorpus = MultiCorpus([one_copy]*multiple)
+    #stats = corpus.obtain_statistics()
+    #print(stats)
     print(corpus)
     
     # 2. what tag do we want to predict?
@@ -71,7 +73,7 @@ def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=
     # 5. initialize sequence tagger
     from flair.models import SequenceTagger
 
-    tagger: SequenceTagger = SequenceTagger(hidden_size=256,
+    tagger: SequenceTagger = SequenceTagger(hidden_size=hidden_units,
                                             embeddings=embeddings,
                                             tag_dictionary=tag_dictionary,
                                             tag_type=tag_type,
@@ -87,13 +89,15 @@ def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=
     trainer.train(resultdir,
                 learning_rate=lr,
                 mini_batch_size=32,
-                max_epochs=1,
+                max_epochs=150,
                 monitor_test=True)
 
+    return corpus
+    
 
-def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False):
+def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False, hidden_units=256):
     # 1. get the corpus
-    #corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
+    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
 
     # 2. what tag do we want to predict?
@@ -114,7 +118,7 @@ def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False):
     # 5. initialize sequence tagger
     from flair.models import SequenceTagger
 
-    tagger: SequenceTagger = SequenceTagger(hidden_size=256,
+    tagger: SequenceTagger = SequenceTagger(hidden_size=hidden_units,
                                             embeddings=embeddings,
                                             tag_dictionary=tag_dictionary,
                                             tag_type=tag_type,

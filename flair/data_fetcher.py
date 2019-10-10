@@ -4,6 +4,7 @@ import re
 import logging
 from enum import Enum
 from pathlib import Path
+import random
 
 from deprecated import deprecated
 
@@ -120,7 +121,7 @@ class NLPTaskDataFetcher:
 
     @staticmethod
     @deprecated(version="0.4.1", reason="Use 'flair.datasets' instead.")
-    def load_corpus(task: Union[NLPTask, str], base_path: [str, Path] = None) -> Corpus:
+    def load_corpus(task: Union[NLPTask, str], base_path: [str, Path] = None, multiple = 1.0) -> Corpus:
         """
         Helper function to fetch a TaggedCorpus for a specific NLPTask. For this to work you need to first download
         and put into the appropriate folder structure the corresponding NLP task data. The tutorials on
@@ -162,6 +163,11 @@ class NLPTaskDataFetcher:
             or task == NLPTask.FASHION.value
         ):
             columns = {0: "text", 1: "pos", 2: "np", 3: "ner"}
+
+            if multiple != 1.0:
+                return NLPTaskDataFetcher.load_column_corpus(
+                    data_folder, columns, tag_to_biloes="ner", multiple=multiple
+            )
 
             return NLPTaskDataFetcher.load_column_corpus(
                 data_folder, columns, tag_to_biloes="ner"
@@ -255,6 +261,7 @@ class NLPTaskDataFetcher:
         test_file=None,
         dev_file=None,
         tag_to_biloes=None,
+        multiple=1.0
     ) -> Corpus:
         """
         Helper function to get a TaggedCorpus from CoNLL column-formatted task data such as CoNLL03 or CoNLL2000.
@@ -267,6 +274,9 @@ class NLPTaskDataFetcher:
         :param tag_to_biloes: whether to convert to BILOES tagging scheme
         :return: a TaggedCorpus with annotated train, dev and test data
         """
+
+        print("ENTERED DEPRECATED LOAD COLUMN CORPUS")
+
 
         if type(data_folder) == str:
             data_folder: Path = Path(data_folder)
@@ -336,6 +346,54 @@ class NLPTaskDataFetcher:
             ]
             sentences_train = [x for x in sentences_train if x not in sentences_dev]
 
+        sentences_train_downsample: List[Sentence] = sentences_train
+        sentences_test_downsample: List[Sentence] = sentences_test
+        sentences_dev_downsample: List[Sentence] = sentences_dev
+        proportion = 1.0/multiple
+        
+        if multiple != 1.0:
+            sentences_train_downsample = [
+                sentences_train[i]
+                for i in NLPTaskDataFetcher.__sample(len(sentences_train), proportion)
+            ]
+
+            #sentences_test_downsample = [
+            #    sentences_test[i]
+            #    for i in NLPTaskDataFetcher.__sample(len(sentences_test), proportion)
+            #]
+
+            #sentences_dev_downsample = [
+            #    sentences_dev[i]
+            #    for i in NLPTaskDataFetcher.__sample(len(sentences_dev), proportion)
+            #]
+
+            print("Sentences train downsample is of size: " + str(len(sentences_train_downsample)))
+            print("Sentences test downsample is of size: " + str(len(sentences_test_downsample)))
+            print("Sentences dev downsample is of size: " + str(len(sentences_dev_downsample)))    
+
+        int_multiple = int(multiple)
+        sentences_train_downsample = sentences_train_downsample*int_multiple
+        #sentences_test_downsample = sentences_test_downsample*multiple
+        #sentences_dev_downsample = sentences_dev_downsample*multiple
+
+        # implement downsample
+        # proportion = 1/multiple
+        #k = len(sentences_train)*proportion // 100
+        #indices = random.sample(range(len(sentences_train)), k)
+        #sentences_train_downsample = [sentences_train[i] for i in indices]
+
+        # implement downsample
+        #proportion = 1/multiple
+        #k = len(sentences_test)*proportion // 100
+        #indices = random.sample(range(len(sentences_test)), k)
+        #sentences_test_downsample = [sentences_test[i] for i in indices]
+
+        # implement downsample
+        #proportion = 1/multiple
+        #k = len(sentences_dev)*proportion // 100
+        #indices = random.sample(range(len(sentences_dev)), k)
+        #sentences_dev_downsample = [sentences_dev[i] for i in indices]
+
         if tag_to_biloes is not None:
             # convert tag scheme to iobes
             for sentence in sentences_train + sentences_test + sentences_dev:
@@ -344,7 +402,7 @@ class NLPTaskDataFetcher:
                 )
 
         return Corpus(
-            sentences_train, sentences_dev, sentences_test, name=data_folder.name
+            sentences_train_downsample, sentences_dev_downsample, sentences_test_downsample, name=data_folder.name
         )
 
     @staticmethod

@@ -705,6 +705,16 @@ class Corpus:
 
         return self
 
+
+    def downsample_multiple(self, percentage: float = 1.0, multiple = 1.0, only_downsample_train=False):
+        self._train = self._downsample_to_proportion_multiple(self.train, percentage, multiple)
+        if not only_downsample_train:
+            self._dev = self._downsample_to_proportion_multiple(self.dev, percentage, multiple)
+            self._test = self._downsample_to_proportion_multiple(self.test, percentage, multiple)
+
+        return self
+
+
     def filter_empty_sentences(self):
         log.info("Filtering empty sentences")
         self._train = Corpus._filter_empty_sentences(self._train)
@@ -777,6 +787,21 @@ class Corpus:
         sampled_size: int = round(len(dataset) * proportion)
         splits = random_split(dataset, [len(dataset) - sampled_size, sampled_size])
         return splits[1]
+
+    def _downsample_to_proportion_multiple(self, dataset: Dataset, proportion: float, multiple):
+
+        sampled_size: int = round(len(dataset) * proportion)
+        splits = random_split(dataset, [len(dataset) - sampled_size, sampled_size])
+        #all_data = ChainDataset([splits[1]]*10)
+        #print("All Data: " + str(len(all_data)))
+        list_data = []
+        i = 0
+        while i < multiple:
+            list_data.append(splits[1])
+        
+        test_data = ConcatDataset(list_data)
+        print("Test all data with concat, not chain: " + str(len(test_data)))
+        return test_data
 
     def obtain_statistics(
         self, tag_type: str = None, pretty_print: bool = True

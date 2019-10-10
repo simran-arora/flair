@@ -108,6 +108,8 @@ class ColumnCorpus(Corpus):
             train = splits[0]
             dev = splits[1]
 
+        print("HI IM IN THIS FUNCTION")
+
         super(ColumnCorpus, self).__init__(train, dev, test, name=data_folder.name)
 
 
