@@ -164,13 +164,8 @@ class NLPTaskDataFetcher:
         ):
             columns = {0: "text", 1: "pos", 2: "np", 3: "ner"}
 
-            if proportion != 1.0:
-                return NLPTaskDataFetcher.load_column_corpus(
-                    data_folder, columns, tag_to_biloes="ner", proportion=proportion
-            )
-
             return NLPTaskDataFetcher.load_column_corpus(
-                data_folder, columns, tag_to_biloes="ner"
+                data_folder, columns, tag_to_biloes="ner", proportion=proportion
             )
 
         # the CoNLL 03 task for German has an additional lemma column
@@ -353,8 +348,8 @@ class NLPTaskDataFetcher:
                 for i in NLPTaskDataFetcher.__sample(len(sentences_train), proportion)
             ]
         
-        int_multiple = int(1.0/proportion)
-        sentences_train_downsample = sentences_train_downsample*int_multiple
+            int_multiple = int(1.0/proportion)
+            sentences_train_downsample = sentences_train_downsample*int_multiple
         
         if tag_to_biloes is not None:
             # convert tag scheme to iobes
