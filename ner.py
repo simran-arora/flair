@@ -8,10 +8,40 @@ import torch
 import argparse
 from pathlib import Path
 from flair.training_utils import EvaluationMetric
+import time
+import os
 
-def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=False, finetune=True):
+# Given a randomly generated fraction of the training dataset (for NER tasks varying the 
+# amount of training data, we may want to save the dataset for future analysis. 
+def save_random_train_set(corpus, path):
+    stamp = time.time()
+
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    dev_name = str(path) + str(stamp)+"_dev"
+    test_name = str(path) + str(stamp)+"_test"
+    train_name = str(path) + str(stamp)+"_train"
+    
+    with open(dev_name, 'w') as dev_f:
+        for sent in corpus.dev:
+            dev_f.write(str(sent.to_plain_string()) + "\n\n")
+    dev_f.close()
+    
+    with open(test_name, 'w') as test_f:
+        for sent in corpus.test:
+            test_f.write(str(sent.to_plain_string()) + "\n\n")
+    test_f.close()
+    
+    with open(train_name, 'w') as train_f:
+        for sent in corpus.train:
+            train_f.write(str(sent.to_plain_string()) + "\n\n")
+    train_f.close()
+
+
+def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=False, finetune=True, proportion=1.0, hidden_units=256):
     # 1. get the corpus
-    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
+    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir, proportion=proportion)
     print(corpus)
 
     # 2. what tag do we want to predict?
@@ -32,7 +62,7 @@ def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=
     # 5. initialize sequence tagger
     from flair.models import SequenceTagger
 
-    tagger: SequenceTagger = SequenceTagger(hidden_size=256,
+    tagger: SequenceTagger = SequenceTagger(hidden_size=hidden_units,
                                             embeddings=embeddings,
                                             tag_dictionary=tag_dictionary,
                                             tag_type=tag_type,
@@ -51,7 +81,7 @@ def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=
                 max_epochs=150,
                 monitor_test=True)
 
-def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False):
+def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False, hidden_units=256):
     # 1. get the corpus
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
@@ -74,7 +104,7 @@ def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False):
     # 5. initialize sequence tagger
     from flair.models import SequenceTagger
 
-    tagger: SequenceTagger = SequenceTagger(hidden_size=256,
+    tagger: SequenceTagger = SequenceTagger(hidden_size=hidden_units,
                                             embeddings=embeddings,
                                             tag_dictionary=tag_dictionary,
                                             tag_type=tag_type,
