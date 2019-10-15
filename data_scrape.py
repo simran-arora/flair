@@ -9,7 +9,7 @@ import gensim
 import tempfile
 
 
-def get_sentences(path):
+def get_sentences(path, print_bool):
     num_errors = 0
     sentences = {}
     counts = {}
@@ -72,7 +72,6 @@ def get_sentences(path):
             num_errors += 1
 
     # Outputs
-    print_bool = False
     if print_bool:
         print("PATH:")
         print(path)
@@ -308,7 +307,7 @@ def test_set_properties(path):
 
     better_count = {}
     for ct in count_frequencies:
-        if count_frequencies[ct] < 100:
+        if ct < 500:
             better_count[ct] = count_frequencies[ct]
 
     import matplotlib.pylab as plt
@@ -319,16 +318,48 @@ def test_set_properties(path):
     file_name = '{}training_set_wc.pdf'.format(dr)
     plt.savefig(file_name)   
 
+
 if __name__ == "__main__":
     #get_sentences('/proj/smallfry/embeddings/glove400k/2018-11-29-fiveSeeds/seed,1_embeddim,300_compresstype,nocompress_bitrate,32/ner_ler_0.1/dev.tsv')
     #parser = argparse.ArgumentParser(description="")
     #parser.add_argument("--eval_type", type=str, required=True)
     #args = parser.parse_args()
+    random_paths_by_prop = [
+        '/proj/smallfry/embeddings/glove400k/2019-08-30-randV1/embeddim,300_compresstype,randcirc_seed,1_randembeddim,800/proportion_0.01/ner_lr_1.0/dev.tsv',
+        '/proj/smallfry/embeddings/glove400k/2019-08-30-randV1/embeddim,300_compresstype,randcirc_seed,1_randembeddim,800/proportion_0.04/ner_lr_1.0/dev.tsv',
+        '/proj/smallfry/embeddings/glove400k/2019-08-30-randV1/embeddim,300_compresstype,randcirc_seed,1_randembeddim,800/proportion_0.1/ner_lr_0.1/dev.tsv',
+        '/proj/smallfry/embeddings/glove400k/2019-08-30-randV1/embeddim,300_compresstype,randcirc_seed,1_randembeddim,800/proportion_0.25/ner_lr_0.1/dev.tsv',
+        '/proj/smallfry/embeddings/glove400k/2019-08-30-randV1/embeddim,300_compresstype,randcirc_seed,1_randembeddim,800/proportion_1.0/ner_lr_0.1/dev.tsv'
+    ]
+
     other=['O'] 
     all_classes=['S-PER', 'E-PER', 'I-PER', 'B-PER', 'O-PER', 
                  'S-LOC', 'E-LOC', 'I-LOC', 'B-LOC', 'O-LOC', 
                  'S-ORG', 'E-ORG', 'I-ORG', 'B-ORG', 'O-ORG', 
                  'S-MISC', 'E-MISC', 'I-MISC', 'B-MISC', 'O-MISC']
+
+    pretrained_paths = [
+       'proj/smallfry/embeddings/glove400k/2018-11-29-fiveSeeds/seed,1_embeddim,300_compresstype,nocompress_bitrate,32/proportion_1.0/ner_lr_0.1_6/dev.tsv'
+    ]
+   
+    sentence_dicts = {}
+    i = 0
+    for path in random_paths_by_prop:
+        sentence_dicts[i] = get_sentences(path, True)
+        i = i + 1
+
+    difference = {}
+    for sent in sentence_dicts[0]:
+        if sentence_dicts[1][sent] == []:
+            difference[sent] = sentence_dicts[0][sent]
+
+    #for dif in difference: 
+        #print(dif)
+    #    for err in difference[dif]:
+            #print(err)
+        #print()
+
+    #print(len(difference))
     #compare_paths('/proj/smallfry/embeddings/glove400k/2019-08-30-randV1/embeddim,300_compresstype,randcirc_seed,1_randembeddim,800/proportion_1.0/ner_lr_0.1_5/dev.tsv', 
     #              '/proj/smallfry/embeddings/glove400k/2018-11-29-fiveSeeds/seed,1_embeddim,300_compresstype,nocompress_bitrate,32/proportion_1.0/ner_lr_0.1_6/dev.tsv', 
     #              true_tag=all_classes, 
