@@ -1,6 +1,6 @@
 from flair.data import Corpus
 from flair.data_fetcher import  NLPTaskDataFetcher, NLPTask
-from flair.embeddings import TokenEmbeddings, WordEmbeddings, StackedEmbeddings
+from flair.embeddings import TokenEmbeddings, WordEmbeddings, BertEmbeddings, StackedEmbeddings
 from typing import List
 import numpy as np
 import random
@@ -38,8 +38,7 @@ def save_random_train_set(corpus, path):
             train_f.write(str(sent.to_plain_string()) + "\n\n")
     train_f.close()
 
-
-def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=False, finetune=True, proportion=1.0, hidden_units=256):
+def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=False, finetune=True, proportion=1.0, hidden_units=256, use_bert=False):
     # 1. get the corpus
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir, proportion=proportion)
     print(corpus)
@@ -52,10 +51,18 @@ def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=
     print(tag_dictionary.idx2item)
 
     # 4. initialize embeddings
-    embedding_types: List[TokenEmbeddings] = [
-       	
-        WordEmbeddings(embed_path)
-    ]
+    if use_bert:
+        embedding_types: List[TokenEmbeddings] = [
+            BertEmbeddings(
+                bert_model_or_path = "bert-base-cased",
+                layers = "-1",
+                pooling_operation = "first"
+            )
+        ]
+    else:
+        embedding_types: List[TokenEmbeddings] = [
+            WordEmbeddings(embed_path)
+        ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
 
