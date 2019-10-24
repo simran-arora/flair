@@ -38,9 +38,9 @@ def save_random_train_set(corpus, path):
             train_f.write(str(sent.to_plain_string()) + "\n\n")
     train_f.close()
 
-def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=False, finetune=True, proportion=1.0, hidden_units=256, use_bert=False):
+def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=False, finetune=True, trainfraction=1.0, hidden_units=256, use_bert=False):
     # 1. get the corpus
-    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir, proportion=proportion)
+    corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir, trainfraction=trainfraction)
     print(corpus)
 
     # 2. what tag do we want to predict?

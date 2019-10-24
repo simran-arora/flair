@@ -2,11 +2,10 @@ import os
 from typing import List, Dict, Union
 import re
 import logging
-import random
 from enum import Enum
 from pathlib import Path
-
 from deprecated import deprecated
+import math
 
 import flair
 from flair.data import Sentence, Corpus, Token, MultiCorpus
@@ -121,7 +120,7 @@ class NLPTaskDataFetcher:
 
     @staticmethod
     @deprecated(version="0.4.1", reason="Use 'flair.datasets' instead.")
-    def load_corpus(task: Union[NLPTask, str], base_path: [str, Path] = None, proportion = 1.0) -> Corpus:
+    def load_corpus(task: Union[NLPTask, str], base_path: [str, Path] = None, trainfraction = 1.0) -> Corpus:
         """
         Helper function to fetch a TaggedCorpus for a specific NLPTask. For this to work you need to first download
         and put into the appropriate folder structure the corresponding NLP task data. The tutorials on
@@ -165,7 +164,7 @@ class NLPTaskDataFetcher:
             columns = {0: "text", 1: "pos", 2: "np", 3: "ner"}
 
             return NLPTaskDataFetcher.load_column_corpus(
-                data_folder, columns, tag_to_biloes="ner", proportion=proportion
+                data_folder, columns, tag_to_biloes="ner", trainfraction=trainfraction
             )
 
         # the CoNLL 03 task for German has an additional lemma column
@@ -256,7 +255,7 @@ class NLPTaskDataFetcher:
         test_file=None,
         dev_file=None,
         tag_to_biloes=None,
-        proportion=1.0,
+        trainfraction=1.0,
     ) -> Corpus:
         """
         Helper function to get a TaggedCorpus from CoNLL column-formatted task data such as CoNLL03 or CoNLL2000.
@@ -338,28 +337,31 @@ class NLPTaskDataFetcher:
             ]
             sentences_train = [x for x in sentences_train if x not in sentences_dev]
         
-        # for training NER with a fraction of the training data, obtain a random sample, and
-        # join "multiple" copies of the fraction so that the training time remains constant
-        sentences_train_downsample: List[Sentence] = sentences_train
-        
-        if proportion != 1.0:
+        if trainfraction != 1.0:
+            # for training NER with a fraction of the training data, obtain a random sample, and join
+            # "multiple" copies of the sample so that the number of training examples remains constant.
+            total_train_sentences = len(sentences_train)
             sentences_train_downsample = [
                 sentences_train[i]
-                for i in NLPTaskDataFetcher.__sample(len(sentences_train), proportion)
+                for i in NLPTaskDataFetcher.__sample(len(sentences_train), trainfraction)
             ]
-        
-            int_multiple = int(1.0/proportion)
-            sentences_train_downsample = sentences_train_downsample*int_multiple
+            # This support trainfractions such that 1/trainfraction is not an integer.
+            int_multiple = math.ceil(1.0/trainfraction)
+            sentences_train = (sentences_train_downsample * int_multiple)[:total_train_sentences]
+        else:
+            sentences_train_downsample = sentences_train
         
         if tag_to_biloes is not None:
             # convert tag scheme to iobes
-            for sentence in sentences_train + sentences_test + sentences_dev:
+            # we pass in sentences_train_downsample instead of sentences_train so that when trainfraction != 1,
+            # we don't call "convert_tag_scheme" multiple times on the same training sentences.
+            for sentence in sentences_train_downsample + sentences_test + sentences_dev:
                 sentence.convert_tag_scheme(
                     tag_type=tag_to_biloes, target_scheme="iobes"
                 )
         
         return Corpus(
-            sentences_train_downsample, sentences_dev, sentences_test, name=data_folder.name
+            sentences_train, sentences_dev, sentences_test, name=data_folder.name
         )
   
 

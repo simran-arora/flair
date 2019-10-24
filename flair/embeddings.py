@@ -296,14 +296,12 @@ class WordEmbeddings(TokenEmbeddings):
                 )
             except:
                 # load embeddings without header
-               
                 prefix = os.path.splitext(embeddings)
-
-                tmp_file = prefix[0] + "_word2vec.txt"
-                if not os.path.exists(tmp_file) or not os.path.isfile(tmp_file):
-                    _ = gensim.scripts.glove2word2vec.glove2word2vec(str(embeddings), tmp_file)
+                word2vec_format_file = prefix[0] + "_word2vec.txt"
+                if not os.path.exists(word2vec_format_file) or not os.path.isfile(word2vec_format_file):
+                    _ = gensim.scripts.glove2word2vec.glove2word2vec(str(embeddings), word2vec_format_file)
                 self.precomputed_word_embeddings = gensim.models.KeyedVectors.load_word2vec_format(
-                    tmp_file, binary=False
+                    word2vec_format_file, binary=False
                 )
         else:
             self.precomputed_word_embeddings = gensim.models.KeyedVectors.load(
