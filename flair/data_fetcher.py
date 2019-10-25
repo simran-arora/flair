@@ -337,7 +337,8 @@ class NLPTaskDataFetcher:
             ]
             sentences_train = [x for x in sentences_train if x not in sentences_dev]
         
-        if trainfraction != 1.0:
+        if trainfraction < 1.0:
+            assert trainfraction > 0, 'trainfraction must be positive.'
             # for training NER with a fraction of the training data, obtain a random sample, and join
             # "multiple" copies of the sample so that the number of training examples remains constant.
             total_train_sentences = len(sentences_train)
