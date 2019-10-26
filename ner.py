@@ -88,7 +88,7 @@ def train_ner(embed_path, resultdir, datadir='resources/tasks', lr=0.1, use_crf=
                 max_epochs=150,
                 monitor_test=True)
 
-def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False, hidden_units=256):
+def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False, hidden_units=256, use_bert=False):
     # 1. get the corpus
     corpus: Corpus = NLPTaskDataFetcher.load_corpus(NLPTask.CONLL_03, base_path=datadir)
     print(corpus)
@@ -101,10 +101,18 @@ def eval_ner(embed_path, resultdir, datadir='resources/tasks', use_crf=False, hi
     print(tag_dictionary.idx2item)
 
     # 4. initialize embeddings
-    embedding_types: List[TokenEmbeddings] = [
-        
-        WordEmbeddings(embed_path)
-    ]
+    if use_bert:
+        embedding_types: List[TokenEmbeddings] = [
+            BertEmbeddings(
+                bert_model_or_path = "bert-base-cased",
+                layers = "-1",
+                pooling_operation = "first"
+            )
+        ]
+    else:
+        embedding_types: List[TokenEmbeddings] = [
+            WordEmbeddings(embed_path)
+        ]
 
     embeddings: StackedEmbeddings = StackedEmbeddings(embeddings=embedding_types)
 
